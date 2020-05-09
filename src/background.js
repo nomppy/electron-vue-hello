@@ -16,19 +16,21 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, 
+  win = new BrowserWindow({
     alwaysOnTop: true,
     title: 'non-generic-app-title',
     titleBarStyle: 'hidden',
-    // transparent: true,
-    frame: true,
+    resizable: true,
+    opacity: 1,
+    frame: false,
     webPreferences: {
     nodeIntegration: true
     }
   })
-  win.on('page-title-updated', function(e) {
-    e.preventDefault()
-  })
+  // win.on('page-title-updated', function(e) {
+  //   e.preventDefault()
+  // })
+  
   win.setAlwaysOnTop(true, "screen-saver");
   win.setVisibleOnAllWorkspaces(true, {visibleOnFullScreen: true});
   

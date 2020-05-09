@@ -8,9 +8,5 @@ new Vue({
   el: "#app",
   router,
   store,
-  data: {
-    hoverMessage: "hover message!",
-    message: "test message",
-  },
   render: h => h(App),
 })

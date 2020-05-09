@@ -1,13 +1,50 @@
 <template>
   <div id="app">
-    <span :title="hoverMessage">
-      Hover here
+    <span :title="title">
+      {{ message }}
     </span>
-    {{ message }}
-    <input type="range" value="0.95" min="0.2" max="1" step="0.05" id="transparencyRange"/>
+    <span class="draggable">
+      drag
+    </span>
+    <br/>
+    <span>{{ opacity }}</span>
+    <br/>
+    
+    <input type="text" v-model="title" id="text-input">
+    <button @click="toggleClickThrough"/>
+    <input type="range" @change="changeOpacity" value=0.95 v-model="opacity" min=0 max=1 step=0.05 id="transparencyRange"/>
     <router-view/>
   </div>
 </template>
+
+<script>
+const { remote } = require('electron')
+var win = remote.getCurrentWindow()
+
+export default {
+  name: 'App',
+  components:{
+
+  },
+  data() {
+    return{
+      title: 'hello',
+      message: 'hello',
+      opacity: 1,
+      ignoreMouseEvents: false,
+    }
+  },
+  methods:{
+    changeOpacity(){
+      win.setOpacity(Number(this.opacity))
+    },
+    toggleClickThrough(){
+      this.ignoreMouseEvents = !this.ignoreMouseEvents
+      win.setIgnoreMouseEvents(this.ignoreMouseEvents)
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -28,5 +65,11 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.draggable{
+  background-color: blue;
+  color: white;
+  -webkit-app-region: drag;
 }
 </style>
