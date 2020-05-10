@@ -1,18 +1,7 @@
 <template>
   <div id="app">
-    <span :title="title">
-      {{ message }}
-    </span>
-    <span class="draggable">
-      drag
-    </span>
-    <br/>
-    <span>{{ opacity }}</span>
-    <br/>
-    
-    <input type="text" v-model="title" id="text-input">
-    <button @click="toggleClickThrough"/>
-    <input type="range" @change="changeOpacity" value=0.95 v-model="opacity" min=0 max=1 step=0.05 id="transparencyRange"/>
+    <p> hello app </p>
+    <Settings/>
     <router-view/>
   </div>
 </template>
@@ -20,11 +9,12 @@
 <script>
 const { remote } = require('electron')
 var win = remote.getCurrentWindow()
+import Settings from "@/views/Settings.vue"
 
 export default {
   name: 'App',
   components:{
-
+    Settings
   },
   data() {
     return{
@@ -38,10 +28,6 @@ export default {
     changeOpacity(){
       win.setOpacity(Number(this.opacity))
     },
-    toggleClickThrough(){
-      this.ignoreMouseEvents = !this.ignoreMouseEvents
-      win.setIgnoreMouseEvents(this.ignoreMouseEvents)
-    }
   }
 }
 </script>

@@ -1,6 +1,15 @@
 'use strict'
 
 import { app, protocol, BrowserWindow } from 'electron'
+const {
+  getCurrentWindow,
+  openMenu,
+  minimizeWindow,
+  unmaximizeWindow,
+  maxUnmaxWindow,
+  isWindowMaximized,
+  closeWindow,
+} = require('./menu-functions.js')
 import {
   createProtocol,
   /* installVueDevtools */
@@ -21,16 +30,30 @@ function createWindow () {
     title: 'non-generic-app-title',
     titleBarStyle: 'hidden',
     resizable: true,
-    opacity: 1,
-    frame: false,
+    frame: true,
     webPreferences: {
     nodeIntegration: true
     }
   })
-  // win.on('page-title-updated', function(e) {
-  //   e.preventDefault()
-  // })
-  
+  win.on('page-title-updated').preventDefault();
+  // win.on('display-app-menu', function(e, args) {
+  //   menu.popup({
+  //     window: win,
+  //     x: args.x,
+  //     y: args.y
+  //   });
+  // });
+  // win.addEventListener('DOMContentLoaded', () => {
+  //   win.getCurrentWindow = getCurrentWindow;
+  //   win.openMenu = openMenu;
+  //   win.minimizeWindow = minimizeWindow;
+  //   win.unmaximizeWindow = unmaximizeWindow;
+  //   win.maxUnmaxWindow = maxUnmaxWindow;
+  //   win.isWindowMaximized = isWindowMaximized;
+  //   win.closeWindow = closeWindow;
+  // });
+
+  win.setApplicationMenu(null);
   win.setAlwaysOnTop(true, "screen-saver");
   win.setVisibleOnAllWorkspaces(true, {visibleOnFullScreen: true});
   
