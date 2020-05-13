@@ -14,6 +14,10 @@
         </div>
       </div>
     </div>
+    <div title="Menu" id="hamburbur-container" class="slide-under" @click="openMenu">
+      <div class="slide-bar"/>
+      <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -74,6 +78,34 @@ export default {
   width: 9px;
   margin: auto;
   border: 1px solid #fff;
+}
+
+#hamburbur {
+  height: 25px;
+  width: 25px;
+}
+
+#hamburbur-container {
+  margin: 5px 0 0 5px;
+  cursor: pointer;
+}
+
+.slide-under {
+  display: inline-block;
+  position: relative;
+}
+
+.slide-bar {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  transition: width 0.5s;
+  background-color: #40b8e8;
+}
+
+.slide-under:hover > .slide-bar {
+  width: 100%;
 }
 
 #close-1 {
