@@ -51,13 +51,13 @@ export default {
   height: 18px;
   width: 100%;
   margin-top: 4px;
-  background-color: #333333;
+  background-color: #222;
   -webkit-app-region: drag;
 }
 
 #title-bar-container {
   display: flex;
-  background-color: #333333;
+  background-color: #222;
 }
 
 #minimize {
@@ -97,11 +97,11 @@ export default {
   width: 24px;
   display: flex;
   cursor: pointer;
-  background-color: #000;
+  background-color: #222;
 }
 
 #minimize-container:hover {
-  background-color: #444;
+  background-color: #333;
 }
 
 #maximize-container {
@@ -109,11 +109,11 @@ export default {
   width: 24px;
   display: flex;
   cursor: pointer;
-  background-color: #000;
+  background-color: #222;
 }
 
 #maximize-container:hover {
-  background-color: #444;
+  background-color: #333;
 }
 
 #close-container {
@@ -121,7 +121,7 @@ export default {
   width: 24px;
   display: flex;
   cursor: pointer;
-  background-color: #000;
+  background-color: #222;
 }
 
 #close-container:hover {
