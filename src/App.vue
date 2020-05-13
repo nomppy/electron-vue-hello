@@ -19,6 +19,8 @@
 </template>
 
 <script>
+const { remote } = require('electron');
+let win = remote.getCurrentWindow();
 
 export default {
   name: 'App',
@@ -30,13 +32,13 @@ export default {
   },
   methods:{
     minimizeWindow() {
-      console.log("minimize window");
+      win.minimize();
     },
     maximizeWindow() {
-      console.log("maximize window");
+      win.isMaximized() ? win.unmaximize() : win.maximize();
     },
     closeWindow() {
-      console.log("close window");
+      win.close();
     },
   }
 }
@@ -76,19 +78,19 @@ export default {
 
 #close-1 {
   height: 2px;
-  width: 14px;
+  width: 13px;
   margin: auto;
   background-color: #fff;
-  transform: rotate(45deg);
+  transform: rotate(40deg);
   Z-index: 1;
 }
 
 #close-2 {
   height: 2px;
-  width: 14px;
+  width: 13px;
   margin: auto;
   background-color: #fff;
-  transform: rotate(90deg);
+  transform: rotate(100deg);
   Z-index: 2;
 }
 
