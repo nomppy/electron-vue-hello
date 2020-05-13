@@ -1,7 +1,13 @@
 <template>
     <div id="Menu">
         <div v-show="show">
-            <h1> Menu </h1>
+            <ul id="menu-list">
+                <li v-for="item in menuItems" :key="item.name">
+                    <router-link @click="$emit('nav', item.path)" :to="item.path">
+                        {{ item.name }}
+                    </router-link>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -14,7 +20,12 @@ export default {
     ],
     data() {
         return {
-
+            menuItems: [
+              {
+                  name: 'Settings',
+                  path: '/settings',
+              },
+            ],
         }
     }
 }

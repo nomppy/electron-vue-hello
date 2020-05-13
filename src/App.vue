@@ -18,8 +18,9 @@
       <div class="slide-bar"/>
       <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
     </div>
-    <Menu :show="showMenu"></Menu>
-    <router-view/>
+    <Menu :show="showMenu" @nav="nav"></Menu>
+    <router-link to="/settings">Settings</router-link>
+    <router-view name="main"/>
   </div>
 </template>
 
@@ -29,10 +30,13 @@ let win = remote.getCurrentWindow();
 
 import Menu from './components/Menu.vue';
 
+// import Settings from './views/Settings.vue'
+
 export default {
   name: 'App',
   components:{
     Menu,
+    // Settings,
   },
   data() {
     return{
@@ -40,6 +44,9 @@ export default {
     }
   },
   methods:{
+    nav(path) {
+      this.$router.push(path);
+    },
     toggleMenu() {
       this.showMenu = !this.showMenu;
     },
