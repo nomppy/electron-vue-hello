@@ -1,8 +1,8 @@
 <template>
-<div class="settings">
-    <p>Settings</p>
-    <!-- <Menu/> -->
-</div>
+    <div class="settings">
+        <p>Settings</p>
+        <!-- <Menu/> -->
+    </div>
 </template>
 
 <script>

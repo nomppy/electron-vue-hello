@@ -14,10 +14,11 @@
         </div>
       </div>
     </div>
-    <div title="Menu" id="hamburbur-container" class="slide-under" @click="openMenu">
+    <div title="Menu" id="hamburbur-container" class="slide-under" @click="toggleMenu">
       <div class="slide-bar"/>
       <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
     </div>
+    <Menu :show="showMenu"></Menu>
     <router-view/>
   </div>
 </template>
@@ -26,15 +27,22 @@
 const { remote } = require('electron');
 let win = remote.getCurrentWindow();
 
+import Menu from './components/Menu.vue';
+
 export default {
   name: 'App',
   components:{
+    Menu,
   },
   data() {
     return{
+      showMenu: false,
     }
   },
   methods:{
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
     minimizeWindow() {
       win.minimize();
     },
@@ -100,7 +108,7 @@ export default {
   bottom: 0;
   height: 3px;
   width: 0;
-  transition: width 0.5s;
+  transition: width 0.5s ease;
   background-color: #40b8e8;
 }
 
