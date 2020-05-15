@@ -16,12 +16,11 @@
       </div>
     </div>
 
-    <div id='menu-bar' :style="{ width: menuBarWidth }">
-      <div title="Menu" id="hamburbur-container" class="slide-under" @click="toggleMenu">
-        <div class="slide-bar"/>
+    <div id='menu-bar' :style="{ width: menuBarWidth }" @mouseenter="menuExtend=true" @mouseleave="menuExtend=false">
+      <div title="Menu" id="hamburbur-container">
         <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
       </div>
-      <Menu :show="menuExtend" @nav="nav"></Menu>
+      <Menu :show="menuExtend"></Menu>
     </div>
 
     <div id="main-window">
@@ -53,11 +52,7 @@ export default {
   },
   methods:{
     nav() {
-      this.menuExtend = false; // retracts menu after a click
-      console.log('hello');
-    },
-    toggleMenu() {
-      this.menuExtend = !this.menuExtend;
+      this.menuExtend = false;
     },
     minimizeWindow() {
       win.minimize();
@@ -126,17 +121,18 @@ export default {
 #hamburbur {
   height: 25px;
   width: 25px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }
 
 #hamburbur-container {
-  top: 5px;
-  left: 5px;
+  position: absolute;
   /* margin: 5px 0 0 5px; */
   cursor: pointer;
 }
 
 .slide-under {
-  display: inline-block;
   position: relative;
 }
 
@@ -149,7 +145,7 @@ export default {
   background-color: #40b8e8;
 }
 
-.slide-under:hover > .slide-bar {
+.slide-under:hover .slide-bar {
   width: 100%;
 }
 
