@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="title-bar-container">
       <div id="title-bar"></div>
       <div id="minimize-container" @click="minimizeWindow">
@@ -14,13 +15,18 @@
         </div>
       </div>
     </div>
-    <div title="Menu" id="hamburbur-container" class="slide-under" @click="toggleMenu">
-      <div class="slide-bar"/>
-      <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
+
+    <div id='menu-bar' :style="{ width: menuBarWidth }">
+      <div title="Menu" id="hamburbur-container" class="slide-under" @click="toggleMenu">
+        <div class="slide-bar"/>
+        <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
+      </div>
+      <Menu :show="menuExtend" @nav="nav"></Menu>
     </div>
-    <Menu :show="showMenu" @nav="nav"></Menu>
-    <router-link to="/settings">Settings</router-link>
-    <router-view name="main"/>
+
+    <div id="main-window">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -30,25 +36,28 @@ let win = remote.getCurrentWindow();
 
 import Menu from './components/Menu.vue';
 
-// import Settings from './views/Settings.vue'
-
 export default {
   name: 'App',
   components:{
     Menu,
-    // Settings,
   },
   data() {
     return{
-      showMenu: false,
+      menuExtend: false,
     }
   },
+  computed: {
+    menuBarWidth() {
+      return this.menuExtend ? '20%' : '35px';
+    } 
+  },
   methods:{
-    nav(path) {
-      this.$router.push(path);
+    nav() {
+      this.menuExtend = false; // retracts menu after a click
+      console.log('hello');
     },
     toggleMenu() {
-      this.showMenu = !this.showMenu;
+      this.menuExtend = !this.menuExtend;
     },
     minimizeWindow() {
       win.minimize();
@@ -64,6 +73,7 @@ export default {
 </script>
 
 <style>
+
 * {
   margin: 0;
 }
@@ -95,13 +105,33 @@ export default {
   border: 1px solid #fff;
 }
 
+#menu-bar {
+  position: absolute;
+  top: 22px;
+  bottom: 0;
+  background-color: #30489a;
+  transition: width .5s ease;
+  Z-index: 2;
+  box-shadow: 1px 0 2px 0 #000;
+}
+
+#main-window {
+  /* display: inline-block; */
+  /* float: left; */
+  position: absolute;
+  Z-index: 1;
+  left: 40px;
+}
+
 #hamburbur {
   height: 25px;
   width: 25px;
 }
 
 #hamburbur-container {
-  margin: 5px 0 0 5px;
+  top: 5px;
+  left: 5px;
+  /* margin: 5px 0 0 5px; */
   cursor: pointer;
 }
 

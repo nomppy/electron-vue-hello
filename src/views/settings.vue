@@ -1,7 +1,6 @@
 <template>
     <div id="settings">
         <p>Settings</p>
-        <!-- <Menu/> -->
     </div>
 </template>
 
