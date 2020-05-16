@@ -17,9 +17,9 @@
     </div>
 
     <div id='menu-bar' :style="{ width: menuBarWidth }" @mouseenter="menuExtend=true" @mouseleave="menuExtend=false">
-      <div title="Menu" id="hamburbur-container">
+      <!-- <div title="Menu" id="hamburbur-container">
         <img id="hamburbur" src="@/assets/hamburbur.png" alt="Menu"/>
-      </div>
+      </div> -->
       <Menu :show="menuExtend"></Menu>
     </div>
 
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     menuBarWidth() {
-      return this.menuExtend ? '20%' : '35px';
+      return this.menuExtend ? '15%' : '35px';
     } 
   },
   methods:{
@@ -118,34 +118,34 @@ export default {
   left: 40px;
 }
 
-#hamburbur {
+/* #hamburbur {
   height: 25px;
   width: 25px;
   position: absolute;
   left: 5px;
   top: 5px;
-}
+} */
 
-#hamburbur-container {
+/* #hamburbur-container {
   position: absolute;
-  /* margin: 5px 0 0 5px; */
+  margin: 5px 0 0 5px;
   cursor: pointer;
-}
+} */
 
-.slide-under {
+.slide-over {
   position: relative;
 }
 
 .slide-bar {
   position: absolute;
-  bottom: 0;
+  top: 0;
   height: 3px;
   width: 0;
   transition: width 0.5s ease;
   background-color: #40b8e8;
 }
 
-.slide-under:hover .slide-bar {
+.slide-over:hover .slide-bar {
   width: 100%;
 }
 

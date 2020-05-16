@@ -1,12 +1,13 @@
 <template>
     <div id="Menu">
-        <div id=list-container v-show="show">
+        <div id=list-container :style="{ left: show ? '0' : '-100px' }">
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
-                    <div class='slide-under'>
+                    <div class="slide-over">
                         <router-link :to="item.path">
+                            <!-- {{ item.name }} -->
                             <div class='slide-bar'>
-                            {{ item.name }}
+                                {{ item.name }}
                             </div>
                         </router-link>
                     </div>
@@ -52,23 +53,27 @@ export default {
 </script>
 
 <style scoped>
+#list-container {
+    position: relative;
+    transition: left 0.5s;
+}
+
 ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
     display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
+    position: relative;
+    top: 50px;
     width: 100%;
-    margin-top: 40px;
+    /* margin-top: 40px; */
     margin-bottom: 50px;
     background-color: #30489a;
 }
 
 li a {
     display: block;
-    padding: 25px 0;
+    padding: 35px 0;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
