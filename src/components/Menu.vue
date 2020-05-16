@@ -5,7 +5,6 @@
                 <li v-for="item in menuItems" :key="item.name">
                     <div class="slide-over">
                         <router-link :to="item.path">
-                            <!-- {{ item.name }} -->
                             <div class='slide-bar'>
                                 {{ item.name }}
                             </div>
@@ -27,21 +26,23 @@ export default {
         return {
             menuItems: [
                 {
-                    name: 'Home',
-                    icon: '@/assets/home.png',
+                    name: 'home',
                     path: '/',
                 },
                 {
-                    name: 'Settings',
-                    icon: '@/assets/settings.png',
+                    name: 'settings',
                     path: '/settings',
                 },
                 {
-                    name: 'Dummy',
-                    icon: '@/assets/dummy.png',
+                    name: 'dummy',
                     path: '#',
                 }
             ],
+        }
+    },
+    methods: {
+        getImgUrl(pic) {
+            return require('@/assets/'+pic)
         }
     },
     computed: {
@@ -66,7 +67,6 @@ ul {
     position: relative;
     top: 50px;
     width: 100%;
-    /* margin-top: 40px; */
     margin-bottom: 50px;
     background-color: #30489a;
 }
