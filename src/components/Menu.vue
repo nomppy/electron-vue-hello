@@ -1,18 +1,11 @@
 <template>
     <div id="Menu">
-        <div id=list-container>
+        <div id="list-container">
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
-                    <img :src="item.icon" 
-                    class="menubar-icon"
-                    style="width: 20px; height: 20px; float: right; right: 7px; top: 2px; position: relative;"/>
-                    <div class="slide-over" :style="{ left: show ? '0' : '-100px' }">
-                        <router-link :to="item.path">
-                            <div class='slide-bar'>
-                                {{ item.name }}
-                            </div>
-                        </router-link>
-                    </div>
+                    <router-link :to="item.path">
+                        <img :src="item.icon" class="menubar-icon"/>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -38,22 +31,16 @@ export default {
                     path: '/settings',
                     icon: require('@/assets/menu_icons/settings.png')
                 },
-                // {
-                //     name: 'dummy',
-                //     path: '#',
-                // }
             ],
         }
     },
     methods: {
         getImgUrl(pic) {
-            return require('../assets/menu_icons/'+pic)
+            return require('@/assets/menu_icons/'+pic+'.png')
         }
     },
     computed: {
-        menuItemMargin() {
-            return 100/this.menuItems.length + '%';
-        }
+
     }
 }
 </script>
@@ -62,6 +49,13 @@ export default {
 #list-container {
     position: relative;
     transition: left 0.5s;
+}
+
+.menubar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin: 10px 0;
+    position: relative;
 }
 
 ul {
@@ -78,7 +72,6 @@ ul {
 
 li a {
     display: block;
-    padding: 35px 0;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -86,30 +79,4 @@ li a {
     color: black;
 }
 
-.slide-over {
-    position: relative;
-    transition: left 0.5s;
-}
-
-/* li a:hover {
-    color: white;
-    background-color: black;
-} */
-
-/* li a {
-    position: relative;
-    text-transform: uppercase;
-    display: flex;
-    color: #000;
-    text-align: center;
-    text-decoration: none;
-    align-items: center;
-    height: 100px;
-    background-color: #222
-} 
-
-li a:hover {
-    background-color: #555;
-    color: white;
-} */
 </style>
