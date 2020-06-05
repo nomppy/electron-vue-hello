@@ -3,7 +3,7 @@
         <div id=list-container>
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
-                    <img :src="'../assets/menu_icons/settings.png'" 
+                    <img :src="item.icon" 
                     class="menubar-icon"
                     style="width: 20px; height: 20px; float: right; right: 7px; top: 2px; position: relative;"/>
                     <div class="slide-over" :style="{ left: show ? '0' : '-100px' }">
@@ -31,10 +31,12 @@ export default {
                 {
                     name: 'home',
                     path: '/',
+                    icon: require('@/assets/menu_icons/home.png')
                 },
                 {
                     name: 'settings',
                     path: '/settings',
+                    icon: require('@/assets/menu_icons/settings.png')
                 },
                 // {
                 //     name: 'dummy',
