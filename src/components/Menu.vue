@@ -1,9 +1,12 @@
 <template>
     <div id="Menu">
-        <div id=list-container :style="{ left: show ? '0' : '-100px' }">
+        <div id=list-container>
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
-                    <div class="slide-over">
+                    <img :src="'../assets/menu_icons/settings.png'" 
+                    class="menubar-icon"
+                    style="width: 20px; height: 20px; float: right; right: 7px; top: 2px; position: relative;"/>
+                    <div class="slide-over" :style="{ left: show ? '0' : '-100px' }">
                         <router-link :to="item.path">
                             <div class='slide-bar'>
                                 {{ item.name }}
@@ -33,16 +36,16 @@ export default {
                     name: 'settings',
                     path: '/settings',
                 },
-                {
-                    name: 'dummy',
-                    path: '#',
-                }
+                // {
+                //     name: 'dummy',
+                //     path: '#',
+                // }
             ],
         }
     },
     methods: {
         getImgUrl(pic) {
-            return require('@/assets/'+pic)
+            return require('../assets/menu_icons/'+pic)
         }
     },
     computed: {
@@ -79,6 +82,11 @@ li a {
     text-transform: uppercase;
     font-size: 20px;
     color: black;
+}
+
+.slide-over {
+    position: relative;
+    transition: left 0.5s;
 }
 
 /* li a:hover {
