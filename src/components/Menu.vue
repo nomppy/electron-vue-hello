@@ -46,11 +46,6 @@ export default {
 </script>
 
 <style scoped>
-#list-container {
-    position: relative;
-    transition: left 0.5s;
-}
-
 .menubar-icon {
     width: 30px; 
     height: 30px; 

@@ -18,7 +18,7 @@
 
     <Menu id='menu-bar'></Menu>
 
-    <div id="main-window">
+    <div id="view">
       <router-view/>
     </div>
   </div>
@@ -93,16 +93,16 @@ export default {
   top: 22px;
   bottom: 0;
   background-color: #30489a;
-  Z-index: 2;
   box-shadow: 1px 0 2px 0 #000;
 }
 
-#main-window {
-  /* display: inline-block; */
-  /* float: left; */
-  position: absolute;
-  Z-index: 1;
-  left: 40px;
+#view {
+  position: fixed;
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  width: 100%;
+  left: 31px;
 }
 
 #close-1 {
