@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
 
     <div id="title-bar-container">
       <div id="title-bar"></div>
@@ -90,6 +90,7 @@ export default {
 
 #menu-bar {
   position: absolute;
+  display: flex;
   top: 22px;
   bottom: 0;
   background-color: #30489a;

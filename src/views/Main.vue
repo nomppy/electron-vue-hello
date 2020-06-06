@@ -1,12 +1,18 @@
 <template>
     <div id='main'>
-        Main
+        <Group :data="groups[0]"/>
+        <Group :data="groups[1]"/>
     </div>
 </template>
 
 <script>
+import Group from '@/components/Group.vue';
+
 export default {
     name: 'Main',
+    components: {
+        Group,
+    },
     data() {
         return {
             groups: [

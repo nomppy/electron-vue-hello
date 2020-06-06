@@ -15,9 +15,6 @@
 <script>
 export default {
     name: "Menu",
-    props: [
-        'show',
-    ],
     data() {
         return {
             menuItems: [
