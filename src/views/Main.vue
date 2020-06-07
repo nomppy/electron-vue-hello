@@ -1,18 +1,8 @@
 <template>
     <div id='main'>
-        <!-- <ul id='groups'>
-            <li v-for="group in groups" :key="group.name">
-                <Group class='group' :data="group"/>
-            </li>
-        </ul> -->
 
-        <!-- <div class='group' v-for="group in groups" :key="group.name">
-            <Group :data="group"/>
-        </div> -->
         <Group class='group' v-for="group in groups" :key="group.name" :data="group"/>
-        <!-- <Group class='group' :data="groups[0]"/>
-        <Group class='group' :data="groups[1]"/>
-        <Group class='group' :data="groups[2]"/> -->
+
     </div>
 </template>
 
