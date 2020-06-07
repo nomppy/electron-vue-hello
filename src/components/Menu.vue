@@ -4,7 +4,7 @@
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
                     <router-link :to="item.path">
-                        <img :src="item.icon" class="menubar-icon"/>
+                        <img @mouseover="hover(item.name)" @mouseleave="unhover(item.name)" :src="item.icon" class="menubar-icon"/>
                     </router-link>
                 </li>
             </ul>
@@ -29,11 +29,16 @@ export default {
                     icon: require('@/assets/menu_icons/settings.png')
                 },
             ],
+            hovers: {},
         }
     },
     methods: {
-        getImgUrl(pic) {
-            return require('@/assets/menu_icons/'+pic+'.png')
+        hover(name) {
+            this.hovers. = true;
+            console.log('hovering ' + name);
+        },
+        unhover(name) {
+            this.hovers.name = false;
         }
     },
     computed: {

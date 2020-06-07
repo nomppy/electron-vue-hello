@@ -46,7 +46,7 @@ export default {
                     name: 'never gonna',
                     items: [
                         {
-                            brief: 'give you up',
+                            brief: 'long ass description for no apparent reason fdjafkdlajfkla fjal fklda jf',
                             details: 'never gonna',
                             completed: false
                         }

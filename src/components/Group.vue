@@ -5,8 +5,10 @@
         </div>
         <div id='items'>
             <ul class='list'>
-                <li v-for="item in data.items" :key="item.brief">
-                    {{ item.completed }} - {{ item.brief }}
+                <li class='list-item' v-for="item in data.items" :key="item.brief">
+                    <Checkbox :completed="item.completed"/>
+                    <GroupBrief :brief="item.brief"/>
+                    <!-- <span class='brief'> {{ item.brief }} </span> -->
                 </li>
             </ul>
         </div>
@@ -14,8 +16,15 @@
 </template>
 
 <script>
+import Checkbox from '@/components/Checkbox.vue';
+import GroupBrief from '@/components/GroupBrief.vue';
+
 export default {
     name: "Group",
+    components: {
+        Checkbox,
+        GroupBrief,
+    },
     props: [
         'data',
     ],
@@ -46,9 +55,18 @@ export default {
     box-shadow: inset 0 0 5px rgba(67, 94, 233, 0.733);
 }
 
-#items > .list {
+.list {
     padding: 0;
     list-style: none;
+}
+
+.list-item {
+    margin: 15px 0;
+}
+
+.brief {
+    left: 30px;
+    position: relative;
 }
 
 </style>
