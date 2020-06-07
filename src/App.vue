@@ -99,8 +99,6 @@ export default {
 
 #view {
   position: fixed;
-  display: flex;
-  flex-flow: row wrap;
   height: 100%;
   width: 100%;
   left: 31px;

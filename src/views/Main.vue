@@ -1,7 +1,8 @@
 <template>
     <div id='main'>
-        <Group :data="groups[0]"/>
-        <Group :data="groups[1]"/>
+        <Group class='group' :data="groups[0]"/>
+        <Group class='group' :data="groups[1]"/>
+        <Group class='group' :data="groups[2]"/>
     </div>
 </template>
 
@@ -40,6 +41,16 @@ export default {
                             completed: true
                         }
                     ]
+                },
+                {
+                    name: 'never gonna',
+                    items: [
+                        {
+                            brief: 'give you up',
+                            details: 'never gonna',
+                            completed: false
+                        }
+                    ]
                 }
             ]
         }
@@ -48,5 +59,31 @@ export default {
 </script>
 
 <style scoped>
+#main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    align-content: space-around;
+}
+
+.group {
+    flex: 0 0 26%;
+    max-width: 26%;
+}
+
+@media (max-width: 800px) {
+    .group {
+        flex: 34%;
+        max-width: 34%;
+    }
+}
+
+@media (max-width: 530px) {
+    .group {
+        flex: 51%;
+        max-width: 51%;
+    }
+}
 
 </style>
