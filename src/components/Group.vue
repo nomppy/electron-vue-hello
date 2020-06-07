@@ -4,7 +4,11 @@
             {{ data.name }}
         </div>
         <div id='items'>
-            {{ data.items }}
+            <ul class='list'>
+                <li v-for="item in data.items" :key="item.brief">
+                    {{ item.completed }} - {{ item.brief }}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -40,6 +44,11 @@ export default {
 #items {
     padding: 10px;
     box-shadow: inset 0 0 5px rgba(67, 94, 233, 0.733);
+}
+
+#items > .list {
+    padding: 0;
+    list-style: none;
 }
 
 </style>
