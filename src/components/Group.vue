@@ -1,12 +1,12 @@
 <template>
     <div id='group'>
         <div id='category'>
-            {{ data.name }}
+            {{ group.name }}
         </div>
         <div id='items'>
             <ul class='list'>
-                <li class='list-item' v-for="item in data.items" :key="item.brief">
-                    <Checkbox :completed="item.completed"/>
+                <li class='list-item' v-for="item in group.items" :key="item.id">
+                    <Checkbox @click.native="check(item.id)" :completed="item.completed"/>
                     <GroupBrief :brief="item.brief"/>
                     <!-- <span class='brief'> {{ item.brief }} </span> -->
                 </li>
@@ -26,11 +26,11 @@ export default {
         GroupBrief,
     },
     props: [
-        'data',
+        'group',
     ],
-    data() {
-        return {
-            
+    methods: {
+        check(id) {
+            this.$emit('mark-complete', this.group.id, id);
         }
     }
 }

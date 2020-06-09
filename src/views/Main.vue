@@ -1,7 +1,7 @@
 <template>
     <div id='main'>
 
-        <Group class='group' v-for="group in groups" :key="group.name" :data="group"/>
+        <Group @mark-complete="(group, item) => markComplete(group, item)" class='group' v-for="group in groups" :key="group.name" :group="group"/>
 
     </div>
 </template>
@@ -14,18 +14,26 @@ export default {
     components: {
         Group,
     },
+    methods: {
+        markComplete(group, item) {
+            this.groups[group].items[item].completed = !this.groups[group].items[item].completed;
+        }
+    },
     data() {
         return {
             groups: [
                 {
                     name: 'template',
+                    id: 0,
                     items: [
                         {
+                            id: 0,
                             brief: 'brief description',
                             details: 'details',
                             completed: false
                         },
                         {
+                            id: 1,
                             brief: 'dafda',
                             details: 'dafda',
                             completed: true
@@ -34,8 +42,10 @@ export default {
                 },
                 {
                     name: 'hi',
+                    id: 1,
                     items: [
                         {
+                            id: 0,
                             brief: 'die',
                             details: 'never say goodbye',
                             completed: true
@@ -44,8 +54,10 @@ export default {
                 },
                 {
                     name: 'never gonna',
+                    id: 2,
                     items: [
                         {
+                            id: 0,
                             brief: 'long ass description for no apparent reason fdjafkdlajfkla fjal fklda jf',
                             details: 'never gonna',
                             completed: false

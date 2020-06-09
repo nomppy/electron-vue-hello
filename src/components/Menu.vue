@@ -52,6 +52,7 @@ export default {
     top: 10px;
     left: 120%;
     font-size: 11px;
+    letter-spacing: 1px;
 }
 
 ul {
