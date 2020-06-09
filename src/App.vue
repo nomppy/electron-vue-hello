@@ -61,6 +61,36 @@ export default {
   margin: 0;
 }
 
+
+.tooltip-right .tooltiptext {
+  transition: opacity .1s ease;
+  opacity: 0;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 6px 7px;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  left: 105%;
+}
+
+.tooltip-right .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.tooltip-right:hover .tooltiptext {
+  opacity: 1;
+}
+
 #title-bar {
   height: 18px;
   width: 100%;

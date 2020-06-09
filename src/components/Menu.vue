@@ -3,8 +3,9 @@
         <div id="list-container">
             <ul id="menu-list">
                 <li v-for="item in menuItems" :key="item.name">
-                    <router-link :to="item.path">
-                        <img @mouseover="hover(item.name)" @mouseleave="unhover(item.name)" :src="item.icon" class="menubar-icon"/>
+                    <router-link class='tooltip-right' :to="item.path">
+                        <img :src="item.icon" class="menubar-icon"/>
+                        <span class="tooltiptext">{{item.name}}</span>
                     </router-link>
                 </li>
             </ul>
@@ -29,17 +30,9 @@ export default {
                     icon: require('@/assets/menu_icons/settings.png')
                 },
             ],
-            hovers: {},
         }
     },
     methods: {
-        hover(name) {
-            this.hovers. = true;
-            console.log('hovering ' + name);
-        },
-        unhover(name) {
-            this.hovers.name = false;
-        }
     },
     computed: {
 
@@ -53,6 +46,12 @@ export default {
     height: 30px; 
     margin: 10px 0;
     position: relative;
+}
+
+.tooltip-right .tooltiptext{
+    top: 10px;
+    left: 120%;
+    font-size: 11px;
 }
 
 ul {
@@ -74,6 +73,7 @@ li a {
     text-transform: uppercase;
     font-size: 20px;
     color: black;
+    position: relative;
 }
 
 </style>
