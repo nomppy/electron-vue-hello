@@ -1,7 +1,9 @@
 <template>
     <div id='main'>
 
-        <Group @mark-complete="(group, item) => markComplete(group, item)" class='group' v-for="group in groups" :key="group.name" :group="group"/>
+        <Group 
+        @mark-complete="(group, item) => markComplete(group, item)" 
+        class='group' v-for="group in groups" :key="group.id" :group="group"/>
 
     </div>
 </template>
