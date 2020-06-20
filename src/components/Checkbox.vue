@@ -19,13 +19,14 @@ export default {
 #checkbox {
     height: 15px;
     width: 15px;
-    box-shadow: inset 0 0 3px rgba(62, 92, 226, 0.979);
+    border: 1px solid blue;
+    border-radius: 4px;
     position: absolute;
     cursor: pointer;
 }
 
 #checkbox:hover {
-    box-shadow: inset 0 0 3px rgba(236, 193, 48, 0.815);
+    border: 1px solid rgba(236, 193, 48, 0.815);
 }
 
 #checkbox:active {

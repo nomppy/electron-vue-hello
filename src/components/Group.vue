@@ -7,7 +7,7 @@
             <ul class='list'>
                 <li class='list-item' v-for="item in group.items" :key="item.id">
                     <Checkbox @click.native="check(item.id)" :completed="item.completed"/>
-                    <GroupBrief :brief="item.brief"/>
+                    <GroupBrief class='brief' :item="item"/>
                     <!-- <span class='brief'> {{ item.brief }} </span> -->
                 </li>
             </ul>
@@ -52,7 +52,8 @@ export default {
 
 #items {
     padding: 10px;
-    box-shadow: inset 0 0 5px rgba(67, 94, 233, 0.733);
+    border-radius: 6px;
+    border: 2px solid rgba(67, 94, 233, 0.733);
 }
 
 .list {
@@ -62,11 +63,6 @@ export default {
 
 .list-item {
     margin: 15px 0;
-}
-
-.brief {
-    left: 30px;
-    position: relative;
 }
 
 </style>
