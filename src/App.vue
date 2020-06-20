@@ -28,30 +28,29 @@
 const { remote } = require('electron');
 let win = remote.getCurrentWindow();
 
+import { mapState } from 'vuex';
 import Menu from './components/Menu.vue';
 
 export default {
-  name: 'App',
-  components:{
-    Menu,
-  },
-  data() {
-    return{
-    }
-  },
-  computed: {
-  },
-  methods:{
-    minimizeWindow() {
-      win.minimize();
-    },
-    maximizeWindow() {
-      win.isMaximized() ? win.unmaximize() : win.maximize();
-    },
-    closeWindow() {
-      win.close();
-    },
-  }
+	name: 'App',
+	components:{
+		Menu,
+	},
+	computed: mapState('todoModal', {
+		showTodoModal: state => state.show,
+		todoModal: state => state.todo,
+	}),
+	methods:{
+		minimizeWindow() {
+		win.minimize();
+		},
+		maximizeWindow() {
+		win.isMaximized() ? win.unmaximize() : win.maximize();
+		},
+		closeWindow() {
+		win.close();
+		},
+	}
 }
 </script>
 

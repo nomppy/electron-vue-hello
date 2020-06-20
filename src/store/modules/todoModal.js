@@ -1,5 +1,7 @@
 
 export default {
+    namespaced: true,
+
     state: {
         show: false,
         todo: {},
@@ -16,6 +18,9 @@ export default {
         }
     },
     actions: {
-        
+        pushTodo ({ commit }, todo) {
+            commit('setTodo', todo);
+            commit('showModal');
+        },
     }
 }

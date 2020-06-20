@@ -1,21 +1,22 @@
 <template>
     <div>
-        <div @click="showModal=true" class='brief' :class="{ 'brief-complete': item.completed }">
+        <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='brief' :class="{ 'brief-complete': item.completed }">
             {{ item.brief }} 
         </div>
-        <Todo :todo="item" v-if="showModal"/>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
     name: 'GroupBrief',
     props: [
         'item'
     ],
-    methods: {
-    }
+    methods: mapActions([
+       'todoModal/pushTodo'
+    ]),
 }
 </script>
 
