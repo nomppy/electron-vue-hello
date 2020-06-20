@@ -5,9 +5,9 @@
         </div>
         <div id='items'>
             <ul class='list'>
-                <li class='list-item' v-for="item in group.items" :key="item.id">
-                    <Checkbox @click.native="check(item.id)" :completed="item.completed"/>
-                    <GroupBrief class='brief' :item="item"/>
+                <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
+                    <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/>
+                    <GroupBrief :item="item"/>
                     <!-- <span class='brief'> {{ item.brief }} </span> -->
                 </li>
             </ul>
@@ -18,6 +18,7 @@
 <script>
 import Checkbox from '@/components/Checkbox.vue';
 import GroupBrief from '@/components/GroupBrief.vue';
+import { mapGetters, mapMutations } from 'vuex';                                    
 
 export default {
     name: "Group",
@@ -25,13 +26,16 @@ export default {
         Checkbox,
         GroupBrief,
     },
+    computed: mapGetters([
+        'getTodosInGroup'
+    ]),
     props: [
         'group',
     ],
     methods: {
-        check(id) {
-            this.$emit('mark-complete', this.group.id, id);
-        }
+        ...mapMutations([
+            'todo/toggleComplete'
+        ])
     }
 }
 </script>

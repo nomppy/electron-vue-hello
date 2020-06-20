@@ -8,21 +8,13 @@
 </template>
 
 <script>
-import Todo from '@/components/Todo.vue';
-
 
 export default {
     name: 'GroupBrief',
     props: [
         'item'
     ],
-    components: {
-        Todo,
-    },
-    data() {
-        return {
-            showModal: false,
-        }
+    methods: {
     }
 }
 </script>
