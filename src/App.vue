@@ -1,6 +1,8 @@
 <template>
   <div>
 
+	<Todo/>
+	
     <div id="title-bar-container">
       <div id="title-bar"></div>
       <div id="minimize-container" @click="minimizeWindow">
@@ -28,18 +30,15 @@
 const { remote } = require('electron');
 let win = remote.getCurrentWindow();
 
-import { mapState } from 'vuex';
 import Menu from './components/Menu.vue';
+import Todo from './components/TodoModal.vue';
 
 export default {
 	name: 'App',
 	components:{
 		Menu,
+		Todo,
 	},
-	computed: mapState('todoModal', {
-		showTodoModal: state => state.show,
-		todoModal: state => state.todo,
-	}),
 	methods:{
 		minimizeWindow() {
 		win.minimize();
