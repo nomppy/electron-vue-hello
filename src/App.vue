@@ -1,22 +1,9 @@
 <template>
   <div>
 
-	<Todo/>
+    <Todo/>
 	
-    <div id="title-bar-container">
-      <div id="title-bar"></div>
-      <div id="minimize-container" @click="minimizeWindow">
-        <div id="minimize"></div>
-      </div>
-      <div id="maximize-container" @click="maximizeWindow">
-        <div id="maximize"></div>
-      </div>
-      <div id="close-container" @click="closeWindow">
-        <div id="close-1">
-          <div id="close-2"></div>
-        </div>
-      </div>
-    </div>
+    <TitleBar/>
 
     <Menu id='menu-bar'></Menu>
 
@@ -32,12 +19,14 @@ let win = remote.getCurrentWindow();
 
 import Menu from './components/Menu.vue';
 import Todo from './components/TodoModal.vue';
+import TitleBar from './components/TitleBar.vue';
 
 export default {
 	name: 'App',
 	components:{
-		Menu,
-		Todo,
+    TitleBar,
+    Menu,
+    Todo,
 	},
 	methods:{
 		minimizeWindow() {
@@ -59,6 +48,16 @@ export default {
   margin: 0;
 }
 
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
 .tooltip-right .tooltiptext {
   transition: opacity .1s ease;
@@ -89,33 +88,6 @@ export default {
   opacity: 1;
 }
 
-#title-bar {
-  height: 18px;
-  width: 100%;
-  margin-top: 4px;
-  background-color: #222;
-  -webkit-app-region: drag;
-}
-
-#title-bar-container {
-  display: flex;
-  background-color: #222;
-}
-
-#minimize {
-  height: 1px;
-  width: 11px;
-  margin: auto;
-  background-color: #fff;
-}
-
-#maximize {
-  height: 9px;
-  width: 9px;
-  margin: auto;
-  border: 1px solid #fff;
-}
-
 #menu-bar {
   position: absolute;
   display: flex;
@@ -130,60 +102,6 @@ export default {
   height: 100%;
   width: 100%;
   left: 31px;
-}
-
-#close-1 {
-  height: 2px;
-  width: 13px;
-  margin: auto;
-  background-color: #fff;
-  transform: rotate(40deg);
-  Z-index: 1;
-}
-
-#close-2 {
-  height: 2px;
-  width: 13px;
-  margin: auto;
-  background-color: #fff;
-  transform: rotate(100deg);
-  Z-index: 2;
-}
-
-#minimize-container {
-  height: 22px;
-  width: 24px;
-  display: flex;
-  cursor: pointer;
-  background-color: #222;
-}
-
-#minimize-container:hover {
-  background-color: #333;
-}
-
-#maximize-container {
-  height: 22px;
-  width: 24px;
-  display: flex;
-  cursor: pointer;
-  background-color: #222;
-}
-
-#maximize-container:hover {
-  background-color: #333;
-}
-
-#close-container {
-  height: 22px;
-  width: 24px;
-  display: flex;
-  cursor: pointer;
-  background-color: #222;
-}
-
-#close-container:hover {
-  background-color: rgb(200, 20, 20);
 }
 
 </style>
