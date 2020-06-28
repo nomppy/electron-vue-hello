@@ -33,13 +33,8 @@ export default {
     transform: scale(0, 0);
     height: 30%;
     width: 30%;
-    background-color: green;
+    background-color: white;
     z-index: 2; 
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
 }
 
 .hi-show {
@@ -50,6 +45,9 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-background {
@@ -69,8 +67,4 @@ export default {
     opacity: 0.85;
 }
 
-.modal {
-    z-index: 2;
-    pointer-events: all;
-}
 </style>
