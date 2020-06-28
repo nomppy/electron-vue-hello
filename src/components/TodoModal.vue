@@ -1,8 +1,6 @@
 <template>
     <div id='todo-modal'>
-        <div :class="{ 'modal-show': show, 'modal': true}">
-            <div :class="{ 'hi-show': show, 'hi': true} "/>
-        </div>
+        <div :class="{ 'hi-show': show, 'hi': true} "/>
         <div :class="{ 'modal-background-show': show, 'modal-background': true }" @click.prevent="$store.commit('todoModal/hideModal')"/>
     </div>
 </template>
@@ -30,12 +28,18 @@ export default {
 
 <style scoped>
 .hi {
+    position: absolute;
     transition: transform 0.1s ease;
     transform: scale(0, 0);
-    height: 100px;
-    width: 100px;
+    height: 30%;
+    width: 30%;
     background-color: green;
-    z-index: 2;
+    z-index: 2; 
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .hi-show {
@@ -44,8 +48,6 @@ export default {
 
 #todo-modal {
     position: absolute;
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
 }
@@ -70,6 +72,5 @@ export default {
 .modal {
     z-index: 2;
     pointer-events: all;
-    margin: auto;
 }
 </style>
