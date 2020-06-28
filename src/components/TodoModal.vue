@@ -1,6 +1,14 @@
 <template>
     <div id='todo-modal'>
-        <div :class="{ 'hi-show': show, 'hi': true} "/>
+        <div :class="{ 'hi-show': show, 'hi': true} ">
+            <div class='brief'>
+                {{ todo.brief }}
+            </div>
+            <div class='long'>
+                {{ todo.details }}
+            </div>
+
+        </div>
         <div :class="{ 'modal-background-show': show, 'modal-background': true }" @click.prevent="$store.commit('todoModal/hideModal')"/>
     </div>
 </template>
@@ -14,7 +22,7 @@ export default {
     computed: {
         ...mapState('todoModal', {
             show: state => state.show,
-            todo: state => state.todo,
+            todo: state => state.todo.item,
         })
     },
     methods: {
@@ -27,13 +35,24 @@ export default {
 </script>
 
 <style scoped>
+
+.brief {
+
+}
+
+.long {
+    
+}
+
 .hi {
     position: absolute;
     transition: transform 0.1s ease;
     transform: scale(0, 0);
-    height: 30%;
-    width: 30%;
+    height: 70%;
+    width: 60%;
+    flex: 2 1 auto;
     background-color: white;
+    border-radius: 10px;
     z-index: 2; 
 }
 
