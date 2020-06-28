@@ -1,5 +1,5 @@
 <template>
-    <div id='title-bar'>
+    <div>
         <div id="title-bar-container">
             <div id="title-bar"></div>
             <div id="minimize-container" @click="minimizeWindow">
@@ -18,15 +18,29 @@
 </template>
 
 <script>
+const { remote } = require('electron');
+let win = remote.getCurrentWindow();
+
 export default {
-    name: 'TitleBar',    
+    name: 'TitleBar',
+    methods:{
+      minimizeWindow() {
+      win.minimize();
+      },
+      maximizeWindow() {
+      win.isMaximized() ? win.unmaximize() : win.maximize();
+      },
+      closeWindow() {
+      win.close();
+		},
+	}
 }
 </script>
 
 <style scoped>
 
 #title-bar {
-  height: 18px;
+  height: 22px;
   width: 100%;
   /* margin-top: 4px; */
   background-color: #222;

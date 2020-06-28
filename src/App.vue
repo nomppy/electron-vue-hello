@@ -1,22 +1,22 @@
 <template>
   <div>
 
-    <Todo/>
-	
     <TitleBar/>
 
-    <Menu id='menu-bar'></Menu>
+    <div id='not-title-bar'>
+      <Todo/>
 
-    <div id="view">
-      <router-view/>
+      <Menu id='menu-bar'/>
+
+      <div id="view">
+        <router-view/>
+      </div>
     </div>
+
   </div>
 </template>
 
 <script>
-const { remote } = require('electron');
-let win = remote.getCurrentWindow();
-
 import Menu from './components/Menu.vue';
 import Todo from './components/TodoModal.vue';
 import TitleBar from './components/TitleBar.vue';
@@ -28,17 +28,6 @@ export default {
     Menu,
     Todo,
 	},
-	methods:{
-		minimizeWindow() {
-		win.minimize();
-		},
-		maximizeWindow() {
-		win.isMaximized() ? win.unmaximize() : win.maximize();
-		},
-		closeWindow() {
-		win.close();
-		},
-	}
 }
 </script>
 
@@ -88,10 +77,17 @@ export default {
   opacity: 1;
 }
 
+#not-title-bar {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 22px;
+}
+
 #menu-bar {
   position: absolute;
   display: flex;
-  top: 22px;
+  top: 0;
   bottom: 0;
   background-color: #30489a;
   box-shadow: 1px 0 2px 0 #000;
@@ -99,8 +95,8 @@ export default {
 
 #view {
   position: fixed;
-  height: 100%;
   width: 100%;
+  height: 100%;
   left: 31px;
 }
 

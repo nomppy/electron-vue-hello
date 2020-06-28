@@ -46,8 +46,8 @@ export default {
     position: absolute;
     display: flex;
     align-items: center;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
 .modal-background {
@@ -55,8 +55,8 @@ export default {
     pointer-events: none;
     position: absolute;
     transition: opacity 0.1s ease;
-    height: 100%;
     width: 100%;
+    height: 100%;
     background-color: #000;
     opacity: 0;
     z-index: 1;
