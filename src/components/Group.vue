@@ -1,14 +1,14 @@
 <template>
     <div id='group'>
         <div id='category'>
-            {{ group.name }}
+            <h3> {{ group.name }} </h3>
         </div>
         <div id='items'>
             <ul class='list'>
                 <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
-                    <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/>
-                    <GroupBrief :item="item"/>
-                    <!-- <span class='brief'> {{ item.brief }} </span> -->
+                    <!-- <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/> -->
+                    <v-checkbox class='checkbox indigo' :color='colors.indigo' :label='item.brief'/>
+                    <!-- <GroupBrief :item="item"/> -->
                 </li>
             </ul>
         </div>
@@ -16,15 +16,17 @@
 </template>
 
 <script>
-import Checkbox from '@/components/Checkbox.vue';
-import GroupBrief from '@/components/GroupBrief.vue';
+// import Checkbox from '@/components/Checkbox.vue';
+// import GroupBrief from '@/components/GroupBrief.vue';
 import { mapGetters, mapMutations } from 'vuex';                                    
+import colors from 'vuetify/lib/util/colors'
+
 
 export default {
     name: "Group",
     components: {
-        Checkbox,
-        GroupBrief,
+        // Checkbox,
+        // GroupBrief,
     },
     computed: mapGetters([
         'getTodosInGroup'
@@ -41,6 +43,9 @@ export default {
 </script>
 
 <style scoped>
+.checkbox {
+}
+
 #group {
     display: flex;
     flex-direction: column;
