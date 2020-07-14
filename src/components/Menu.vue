@@ -55,7 +55,7 @@ export default {
     letter-spacing: 1px;
 }
 
-ul {
+#menu-list {
     margin: 0;
     padding: 0;
     list-style-type: none;

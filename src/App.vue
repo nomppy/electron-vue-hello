@@ -1,7 +1,5 @@
 <template>
-  <div>
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <v-app>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 
     <TitleBar/>
@@ -16,7 +14,7 @@
       </div>
     </div>
 
-  </div>
+  </v-app>
 </template>
 
 <script>

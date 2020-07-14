@@ -6,7 +6,7 @@
         <ul class='list'>
             <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
                 <!-- <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/> -->
-                <v-checkbox class='checkbox' color='indigo' label='item.brief'/>
+                <v-checkbox color='indigo' :label='item.brief'/>
                 <!-- <GroupBrief :item="item"/> -->
             </li>
         </ul>
@@ -16,6 +16,7 @@
 <script>
 // import Checkbox from '@/components/Checkbox.vue';
 // import GroupBrief from '@/components/GroupBrief.vue';
+import 'vuetify/dist/vuetify.min.css'
 import { mapGetters, mapMutations } from 'vuex';                                    
 
 
