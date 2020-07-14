@@ -1,7 +1,7 @@
 <template>
     <div id='main'>
 
-        <Group class='group' v-for="group in groups" :key="group.id" :group="group"/>
+        <Group class='group elevation-3' v-for="group in groups" :key="group.id" :group="group"/>
 
     </div>
 </template>
@@ -35,6 +35,7 @@ export default {
 .group {
     flex: 0 0 26%;
     max-width: 26%;
+    margin-top: 30px;
 }
 
 @media (max-width: 800px) {

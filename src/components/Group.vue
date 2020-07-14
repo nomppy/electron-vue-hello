@@ -6,7 +6,7 @@
         <ul class='list'>
             <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
                 <!-- <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/> -->
-                <v-checkbox color='indigo' :label='item.brief'/>
+                <v-checkbox color='#6ec4d3' :label='item.brief'/>
                 <!-- <GroupBrief :item="item"/> -->
             </li>
         </ul>
@@ -61,6 +61,7 @@ export default {
 .list {
     padding: 0;
     list-style: none;
+    margin-left: 20px;
 }
 
 .list-item {
