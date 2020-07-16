@@ -1,8 +1,8 @@
 <template>
-  <v-app>
+  <v-app id='app'>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 
-    <TitleBar/>
+    <TitleBar id='titlebar'/>
 
     <div id='not-title-bar'>
       <Todo/>
@@ -37,7 +37,6 @@ export default {
 * {
   margin: 0;
 }
-
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -85,8 +84,15 @@ export default {
   top: 22px;
 }
 
+#titlebar {
+  z-index: 3;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
 #menu-bar {
-  position: absolute;
+  position: fixed;
   display: flex;
   top: 0;
   bottom: 0;
@@ -95,10 +101,15 @@ export default {
 }
 
 #view {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   left: 31px;
+}
+
+html > ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 </style>

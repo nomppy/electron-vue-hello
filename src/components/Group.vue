@@ -1,55 +1,72 @@
 <template>
     <div id='group'>
-        <div id='category'>
+        <div id='category' class='noselect'>
             <h3> {{ group.name }} </h3>
         </div>
         <ul class='list'>
             <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
-                <!-- <Checkbox @click.native="$store.commit('todo/toggleComplete', item.id)" :completed="item.completed"/> -->
-                <v-checkbox color='#6ec4d3' :label='item.brief'/>
-                <!-- <GroupBrief :item="item"/> -->
+                <!-- <v-row align='center'> -->
+                     <!-- not sure why this works, thought the only way to change data was through mutations -->
+                <div class='item-container'>
+                    <v-checkbox v-model="item.completed" class='checkbox' color='#6ec4d3'/> 
+
+                    <GroupBrief class='brief' :item="item"/>
+                </div>
+                <!-- </v-row> -->
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-// import Checkbox from '@/components/Checkbox.vue';
-// import GroupBrief from '@/components/GroupBrief.vue';
+import GroupBrief from '@/components/GroupBrief.vue';
 import 'vuetify/dist/vuetify.min.css'
-import { mapGetters, mapMutations } from 'vuex';                                    
+import { mapGetters, mapMutations, mapActions, mapState } from 'vuex';                                    
 
 
 export default {
     name: "Group",
     components: {
-        // Checkbox,
-        // GroupBrief,
+        GroupBrief,
     },
-    computed: mapGetters([
+    computed: {
+        ...mapGetters([
         'getTodosInGroup'
-    ]),
+        ]),
+        ...mapState('todo', [
+            'items',
+        ])
+    },
     props: [
         'group',
     ],
     methods: {
         ...mapMutations([
             'todo/toggleComplete'
+        ]),
+        ...mapActions([
+            'todoModal/pushTodo'
         ])
     }
 }
 </script>
 
 <style scoped>
-.checkbox {
+.item-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center; 
+}
 
+.brief {
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
 #group {
     display: flex;
     flex-direction: column;
     list-style: none;
-    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
 #category {

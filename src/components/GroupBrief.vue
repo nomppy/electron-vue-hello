@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='brief' :class="{ 'brief-complete': item.completed }">
-            {{ item.brief }} 
-        </div>
+    <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='brief' :class="{ 'brief-complete': item.completed }">
+        {{ item.brief }} 
     </div>
 </template>
 
@@ -23,11 +21,13 @@ export default {
 <style scoped>
 
 .brief {
-    left: 30px;
+    left: 15px;
     position: relative;
-    font-size: 14px;
-    cursor: pointer;
+    font-size: 18px;
     margin-right: 30px;
+    cursor: pointer;
+    display: inline;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
 .brief-complete {

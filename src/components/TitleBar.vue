@@ -42,6 +42,7 @@ export default {
 #title-bar {
   height: 22px;
   width: 100%;
+  right: 0;
   /* margin-top: 4px; */
   background-color: #222;
   -webkit-app-region: drag;
