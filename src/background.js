@@ -28,7 +28,7 @@ function createWindow () {
   win.on('page-title-updated', async (e) => {
     e.preventDefault();
   })
-  // win.setAlwaysOnTop(true, "screen-saver");  
+  win.setAlwaysOnTop(true, "screen-saver");  
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

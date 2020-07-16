@@ -52,14 +52,23 @@ export default {
 </script>
 
 <style scoped>
+
+.checkbox {
+    transform: scale(0.7) translateY(-2px);
+}
+
 .item-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center; 
+    height: 30px;
 }
 
 .brief {
+    /* position: relative;
+    top: 50%;
+    transform: translateY(-50%); */
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 

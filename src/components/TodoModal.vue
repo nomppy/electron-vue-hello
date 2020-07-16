@@ -57,7 +57,7 @@ export default {
 }
 
 .hi-show {
-    transform: scale(1, 1);
+    transform: scale(1);
 }
 
 #todo-modal {

@@ -23,7 +23,7 @@ export default {
 .brief {
     left: 15px;
     position: relative;
-    font-size: 18px;
+    font-size: 14px;
     margin-right: 30px;
     cursor: pointer;
     display: inline;
