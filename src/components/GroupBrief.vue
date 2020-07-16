@@ -1,6 +1,8 @@
 <template>
-    <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='brief' :class="{ 'brief-complete': item.completed }">
+    <div @click="$store.dispatch('todoModal/pushTodo', {item})" :class="{ 'brief-complete': item.completed }">
         {{ item.brief }} 
+
+        <!-- need to truncate text so it fits in one line -->
     </div>
 </template>
 
@@ -35,7 +37,4 @@ export default {
     color: grey;
 }
 
-.brief:hover {
-    color: rgba(236, 193, 48, 0.815);
-}
 </style>
