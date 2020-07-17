@@ -30,22 +30,34 @@ export default {
     justify-content: space-evenly;
     align-items: flex-start;
     align-content: space-around;
+    margin-right: 31px;
 }
+
+
+/* #main {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: space-evenly;
+    max-height: 150%;
+} */
 
 .group {
-    flex: 0 0 26%;
-    max-width: 26%;
-    margin-top: 30px;
+    /* flex: 26%;
+    max-width: 26%; */
+    width: 15em;
+    margin: 15px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 45em) {
     .group {
         flex: 34%;
         max-width: 34%;
     }
 }
 
-@media (max-width: 530px) {
+@media (max-width: 30em) {
     .group {
         flex: 51%;
         max-width: 51%;

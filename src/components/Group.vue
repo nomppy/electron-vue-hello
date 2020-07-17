@@ -11,7 +11,10 @@
                     <v-checkbox v-model="item.completed" class='checkbox' color='#6ec4d3'/> 
 
                     <GroupBrief class='brief' :item="item"/>
+
                 </div>
+
+                <TodoDialog :item='item' class='dialog'/>
                 <!-- </v-row> -->
             </li>
         </ul>
@@ -20,6 +23,7 @@
 
 <script>
 import GroupBrief from '@/components/GroupBrief.vue';
+import TodoDialog from '@/components/TodoDialog.vue';
 import 'vuetify/dist/vuetify.min.css'
 import { mapGetters, mapMutations, mapActions, mapState } from 'vuex';                                    
 
@@ -28,6 +32,7 @@ export default {
     name: "Group",
     components: {
         GroupBrief,
+        TodoDialog,
     },
     computed: {
         ...mapGetters([
@@ -59,19 +64,32 @@ export default {
 
 .item-container {
     display: flex;
+    width: 100%;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center; 
-    height: 30px;
+    height: 2.4em;
+    /* overflow: hidden; */
     padding-left: 30px;
-}
-
-.brief {
+    line-height: 1.2em;
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
-.brief:hover .item-container{
-    background-color: grey;
+.dialog {
+    opacity: 0;
+    display: inline-block;
+    position: absolute;
+    font-size: 14px;
+    width: 50%;
+    transition: opacity 0.3s ease;
+    align-self: flex-start;
+    left: 100%;
+    background-color: red;
+    /* z-index: -1; */
+}
+
+.item-container:hover ~ .dialog {
+    opacity: 0.7;
 }
 
 #group {
@@ -93,6 +111,11 @@ export default {
 
 .list-item {
     margin: 15px 0;
+    display: flex;
+    position: relative;
+    flex-flow: row nowrap;
+    height: 2.4em;
+    width: 100%;
 }
 
 .hvr-grow-shadow {
@@ -106,9 +129,11 @@ export default {
   -webkit-transition-property: box-shadow, transform;
   transition-property: box-shadow, transform;
 }
+
 .hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
   box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
 </style>
