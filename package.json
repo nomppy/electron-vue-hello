@@ -13,6 +13,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "colcade": "^0.2.0",
     "core-js": "^3.6.4",
     "electron-devtools-installer": "^3.0.0",
     "vue": "^2.6.11",
