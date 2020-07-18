@@ -19,35 +19,35 @@ export default {
                 ]
             },
             {
-                id: 1,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
-                id: 1,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
-                id: 1,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
                 id: 2,
+                name: 'hi',
+                items: [
+                    2
+                ]
+            },
+            {
+                id: 3,
+                name: 'hi',
+                items: [
+                    2
+                ]
+            },
+            {
+                id: 4,
+                name: 'hi',
+                items: [
+                    2
+                ]
+            },
+            {
+                id: 5,
                 name: 'never gonna',
                 items: [
                     3
                 ],
             },
             {
-                id: 0,
+                id: 7,
                 name: 'template',
                 items: [
                     0, 1
@@ -55,26 +55,12 @@ export default {
             },
             
             {
-                id: 2,
+                id: 8,
                 name: 'never gonna',
                 items: [
                     3
                 ],
             },
-            {
-                id: 3,
-                name: 'dafdaf',
-                items: [
-                    
-                ]
-            },
-            {
-                id: 3,
-                name: 'dafdaf',
-                items: [
-                    
-                ]
-            }
         ],
     },
     getters: {

@@ -1,7 +1,7 @@
 <template>
-    <div id='group'>
+    <div id='group' :style="{ 'grid-row': 'span ' + (3+group.items.length) }">
         <div id='category' class='noselect'>
-            <h3> {{ group.name }} </h3>
+            <h3> {{ group.name }} - {{ group.items.length }} </h3>
         </div>
         <ul class='list'>
             <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import GroupBrief from '@/components/GroupBrief.vue';
-import TodoDialog from '@/components/TodoDialog.vue';
+import GroupBrief from '../components/GroupBrief.vue';
+import TodoDialog from '../components/TodoDialog.vue';
 import 'vuetify/dist/vuetify.min.css'
 import { mapGetters, mapMutations, mapActions, mapState } from 'vuex';                                    
 
