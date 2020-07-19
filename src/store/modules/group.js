@@ -47,15 +47,14 @@ export default {
                 ],
             },
             {
-                id: 7,
+                id: 6,
                 name: 'template',
                 items: [
                     0, 1
                 ]
             },
-            
             {
-                id: 8,
+                id: 7,
                 name: 'never gonna',
                 items: [
                     3

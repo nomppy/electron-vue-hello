@@ -33,7 +33,4 @@ export default {
     grid-gap: 1em 4em;
 }
 
-.group {
-    grid-row: span 3;
-}
 </style>

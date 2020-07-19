@@ -7,14 +7,15 @@
             <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
                 <!-- <v-row align='center'> -->
                      <!-- not sure why this works, thought the only way to change data was through mutations -->
-                <div class='item-container hvr-grow-shadow'>
+                <div class='item-container hvr-grow-shadow' 
+                @mouseover="getMousePos" >
                     <v-checkbox v-model="item.completed" class='checkbox' color='#6ec4d3'/> 
 
                     <GroupBrief class='brief' :item="item"/>
 
                 </div>
 
-                <TodoDialog :item='item' class='dialog'/>
+                <TodoDialog :item='item' class='dialog' :class= "{ 'wrap-left': mouseOnRight }"/>
                 <!-- </v-row> -->
             </li>
         </ul>
@@ -34,13 +35,22 @@ export default {
         GroupBrief,
         TodoDialog,
     },
+    data() {
+        return {
+            mouseX: 0,
+            mouseY: 0,
+        }
+    },
     computed: {
         ...mapGetters([
         'getTodosInGroup'
         ]),
         ...mapState('todo', [
             'items',
-        ])
+        ]),
+        mouseOnRight() {
+            return this.mouseX/window.innerWidth > 0.5;
+        }
     },
     props: [
         'group',
@@ -51,7 +61,12 @@ export default {
         ]),
         ...mapActions([
             'todoModal/pushTodo'
-        ])
+        ]),
+        getMousePos(event) {
+            console.log(event.pageX);
+            this.mouseX = event.clientX;
+            this.mouseY = event.clientY;
+        }
     }
 }
 </script>
@@ -86,6 +101,10 @@ export default {
     left: 100%;
     background-color: red;
     /* z-index: -1; */
+}
+
+.wrap-left {
+    background-color: green;
 }
 
 .item-container:hover ~ .dialog {
