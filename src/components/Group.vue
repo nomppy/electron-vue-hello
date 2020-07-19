@@ -23,7 +23,7 @@
                     <!-- </li> -->
                 </ul>
             </div>
-            <div class='flip-card-back'>
+            <div @click="flip=false" class='flip-card-back'>
                 <TodoDialog :item="{ brief, detail }"/>
             </div>
         </div>
