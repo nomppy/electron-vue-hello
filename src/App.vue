@@ -5,7 +5,6 @@
     <TitleBar id='titlebar'/>
 
     <div id='not-title-bar'>
-      <Todo/>
 
       <Menu id='menu-bar'/>
 
@@ -19,7 +18,6 @@
 
 <script>
 import Menu from './components/Menu.vue';
-import Todo from './components/TodoModal.vue';
 import TitleBar from './components/TitleBar.vue';
 
 export default {
@@ -27,7 +25,6 @@ export default {
 	components:{
     TitleBar,
     Menu,
-    Todo,
 	},
 }
 </script>

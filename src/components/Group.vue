@@ -1,56 +1,65 @@
 <template>
-    <div id='group' :style="{ 'grid-row': 'span ' + (3+group.items.length) }">
-        <div id='category' class='noselect'>
-            <h3> {{ group.name }} - {{ group.items.length }} </h3>
-        </div>
-        <ul class='list'>
-            <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id">
-                <!-- <v-row align='center'> -->
-                     <!-- not sure why this works, thought the only way to change data was through mutations -->
-                <div class='item-container hvr-grow-shadow' 
-                @mouseover="getMousePos" >
-                    <v-checkbox v-model="item.completed" class='checkbox' color='#6ec4d3'/> 
-
-                    <GroupBrief class='brief' :item="item"/>
-
+    <div 
+    @mouseleave="brief=''; details=''; flip=false"
+    class='group' :style="{ 'grid-row': 'span ' + (3+group.items.length) }">
+        <div class='flip-card-inner elevation-3' :class="{ 'flip': flip }">
+            <div class='flip-card-front'>
+                <div id='category' class='noselect'>
+                    <h3> {{ group.name }} - {{ group.items.length }} </h3>
                 </div>
+                <ul class='list'>
+                    <Todo class='todo'
+                    @click.native="flip = true"
+                    @mouseenter.native="brief=item.brief; details=item.details"
+                    v-for="item in getTodosInGroup(group.id)" :key="item.id" :item="item"/>
 
-                <TodoDialog :item='item' class='dialog' :class="{ 'wrap-left': mouseOnRight }"/>
-                <!-- </v-row> -->
-            </li>
-        </ul>
+                    <!-- <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id"> -->
+                        <!-- <v-row align='center'> -->
+                            <!-- not sure why this works, thought the only way to change data was through mutations -->
+                        <!-- <Todo :item='item'/> -->
+
+                        <!-- <TodoDialog :item='item' class='dialog' :class="{ 'wrap-left': mouseOnRight }"/> -->
+                        <!-- </v-row> -->
+                    <!-- </li> -->
+                </ul>
+            </div>
+            <div class='flip-card-back'>
+                <TodoDialog :item="{ brief, detail }"/>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import GroupBrief from '../components/GroupBrief.vue';
+import Todo from '../components/Todo.vue';
 import TodoDialog from '../components/TodoDialog.vue';
 import 'vuetify/dist/vuetify.min.css'
-import { mapGetters, mapMutations, mapActions, mapState } from 'vuex';                                    
+import { mapGetters, mapMutations, mapState } from 'vuex';                                    
 
 
 export default {
     name: "Group",
     components: {
-        GroupBrief,
+        Todo,
         TodoDialog,
     },
     data() {
         return {
+            flip: false,
+            brief: '',
+            detail: '',
             mouseX: 0,
             mouseY: 0,
         }
     },
     computed: {
         ...mapGetters([
-        'getTodosInGroup'
+        'getTodosInGroup',
+        'todo/getById'
         ]),
         ...mapState('todo', [
             'items',
         ]),
-        mouseOnRight() {
-            return this.mouseX/window.innerWidth > 0.5;
-        }
     },
     props: [
         'group',
@@ -59,75 +68,28 @@ export default {
         ...mapMutations([
             'todo/toggleComplete'
         ]),
-        ...mapActions([
-            'todoModal/pushTodo'
-        ]),
-        getMousePos(event) {
-            console.log(event.pageX);
-            this.mouseX = event.clientX;
-            this.mouseY = event.clientY;
-        }
     }
 }
 </script>
 
 <style scoped>
 
-.checkbox {
-    transform: scale(0.7) translateY(-2px);
+
+.list {
+    padding: 0;
+    list-style: none;
 }
 
-.item-container {
+.todo {
+    margin: 15px 0;
     display: flex;
-    width: 100%;
+    position: relative;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center; 
     height: 2.4em;
-    /* overflow: hidden; */
-    padding-left: 30px;
-    line-height: 1.2em;
-    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    width: 100%;
 }
 
-.dialog {
-    opacity: 0;
-    color: rgb(197, 197, 197);
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: space-around;
-    position: absolute;
-    font-size: 14px;
-    width: 50%;
-    transition: opacity 0.1s ease;
-    align-self: flex-start;
-    left: 100%;
-    background-color: #2f3136;
-    border-radius: 6px;
-    animation-duration: 0.1s;
-    animation-fill-mode: both;
-}
-
-.wrap-left {
-    left: -50%;
-}
-
-.dialog:hover {
-    color:white;
-    opacity: 1;
-    z-index: 3;
-}
-
-.item-container:hover ~ .dialog {
-    animation-name: fadeInRight;
-}
-
-.item-container:hover ~ .wrap-left {
-    animation-name: fadeInLeft;
-}
-
-#group {
+.group {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -139,38 +101,43 @@ export default {
     margin: 10px;
 }
 
-.list {
-    padding: 0;
-    list-style: none;
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
-.list-item {
-    margin: 15px 0;
-    display: flex;
-    position: relative;
-    flex-flow: row nowrap;
-    height: 2.4em;
-    width: 100%;
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
 }
 
-.hvr-grow-shadow {
-  /* display: inline-block; */
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: box-shadow, transform;
-  transition-property: box-shadow, transform;
+/* Do an horizontal flip when you move the mouse over the flip box container
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+} */
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
 }
 
-.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
-  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.flip-card-back {
+    transform: rotateY(180deg);
+    background-color: rgb(189, 189, 189);
 }
-  
+
+.flip {
+    transform: rotateY(180deg);
+}
+
 @keyframes fadeInRight {
   from {
     opacity: 0;

@@ -1,5 +1,8 @@
 <template>
-    <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='truncate-overflow' :class="{ 'brief-complete': item.completed }">
+    <!-- <div @click="$store.dispatch('todoModal/pushTodo', {item})" class='truncate-overflow' :class="{ 'brief-complete': item.completed }"> -->
+    <div
+    class='truncate-overflow' 
+    :class="{ 'brief-complete': item.completed }">
         {{ item.brief }} 
         <!-- need to truncate text so it fits in one line -->
     </div>
@@ -13,9 +16,15 @@ export default {
     props: [
         'item'
     ],
-    methods: mapActions([
-       'todoModal/pushTodo'
-    ]),
+    methods: {
+        ...mapActions([
+        'todoModal/pushTodo'
+        ]),
+        pushTodo(id) {
+            console.log('pushing todo');
+            this.$emit('push-todo', id);
+        }
+    }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div id='main' class='grid-masonry'>
 
-        <Group class='group elevation-3 grid-item' v-for="group in groups" :key="group.id" :group="group"/>
+        <Group class='grid-item' v-for="group in groups" :key="group.id" :group="group"/>
         
     </div>
 </template>
