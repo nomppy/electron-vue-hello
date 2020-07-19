@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class='brief'>
+            {{ item.brief }}
+        </div>
         <div class='details'>
             {{ item.details }}
         </div>
@@ -16,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
-.details {
+.brief {
     font-size: 16px;
     cursor: default;
     margin: 20px;

@@ -15,7 +15,7 @@
 
                 </div>
 
-                <TodoDialog :item='item' class='dialog' :class= "{ 'wrap-left': mouseOnRight }"/>
+                <TodoDialog :item='item' class='dialog' :class="{ 'wrap-left': mouseOnRight }"/>
                 <!-- </v-row> -->
             </li>
         </ul>
@@ -92,23 +92,39 @@ export default {
 
 .dialog {
     opacity: 0;
-    display: inline-block;
+    color: rgb(197, 197, 197);
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
     position: absolute;
     font-size: 14px;
     width: 50%;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.1s ease;
     align-self: flex-start;
     left: 100%;
-    background-color: red;
-    /* z-index: -1; */
+    background-color: #2f3136;
+    border-radius: 6px;
+    animation-duration: 0.1s;
+    animation-fill-mode: both;
 }
 
 .wrap-left {
-    background-color: green;
+    left: -50%;
+}
+
+.dialog:hover {
+    color:white;
+    opacity: 1;
+    z-index: 3;
 }
 
 .item-container:hover ~ .dialog {
-    opacity: 0.7;
+    animation-name: fadeInRight;
+}
+
+.item-container:hover ~ .wrap-left {
+    animation-name: fadeInLeft;
 }
 
 #group {
@@ -153,6 +169,32 @@ export default {
   box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+  
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+  }
+
+  to {
+    opacity: 0.7;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    opacity: 0.7;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 </style>
