@@ -67,8 +67,6 @@ export default {
             'todo/toggleComplete'
         ]),
         updateTodo(item){
-            console.log(item.brief);
-            console.log(item.details);
             this.brief = item.brief;
             this.details = item.details;
         }
@@ -135,7 +133,7 @@ export default {
 
 .flip-card-back {
     transform: rotateY(180deg);
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(73, 73, 73);
 }
 
 .flip {
