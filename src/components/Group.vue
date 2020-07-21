@@ -10,7 +10,7 @@
                 <ul class='list'>
                     <Todo class='todo'
                     @click.native="flip = true"
-                    @mouseenter.native="brief=item.brief; details=item.details"
+                    @mouseenter.native="updateTodo(item)"
                     v-for="item in getTodosInGroup(group.id)" :key="item.id" :item="item"/>
 
                     <!-- <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id"> -->
@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div @click="flip=false" class='flip-card-back'>
-                <TodoDialog :item="{ brief, detail }"/>
+                <TodoDialog :item="{ brief, details }"/>
             </div>
         </div>
     </div>
@@ -47,9 +47,7 @@ export default {
         return {
             flip: false,
             brief: '',
-            detail: '',
-            mouseX: 0,
-            mouseY: 0,
+            details: '',
         }
     },
     computed: {
@@ -68,6 +66,12 @@ export default {
         ...mapMutations([
             'todo/toggleComplete'
         ]),
+        updateTodo(item){
+            console.log(item.brief);
+            console.log(item.details);
+            this.brief = item.brief;
+            this.details = item.details;
+        }
     }
 }
 </script>

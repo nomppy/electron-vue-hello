@@ -22,6 +22,10 @@ export default {
 .brief {
     font-size: 16px;
     cursor: default;
-    margin: 20px;
+}
+
+.details {
+    font-size: 14px;
+    cursor: default;
 }
 </style>
