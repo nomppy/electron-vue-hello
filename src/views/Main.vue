@@ -28,7 +28,7 @@ export default {
     margin-left: 19px;
     margin-right: 50px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 1.2em;
+    grid-auto-rows: 0.6em;
     grid-auto-flow: row;
     grid-gap: 1em 4em;
 }

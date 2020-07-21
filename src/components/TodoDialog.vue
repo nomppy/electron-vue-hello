@@ -35,6 +35,7 @@ export default {
 .brief {
     font-size: 16px;
     cursor: default;
+    border-bottom: 1px solid #6ec4d3;
 }
 
 .details {

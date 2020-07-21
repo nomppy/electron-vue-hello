@@ -1,7 +1,7 @@
 <template>
     <div 
     @mouseleave="brief=''; details=''; flip=false"
-    class='group' :style="{ 'grid-row': 'span ' + (3+group.items.length) }">
+    class='group' :style="{ 'grid-row': 'span ' + ((4+2*group.items.length)) }">
         <div class='flip-card-inner elevation-3' :class="{ 'flip': flip }">
             <div class='flip-card-front'>
                 <div id='category' class='noselect'>
@@ -22,6 +22,7 @@
                         <!-- </v-row> -->
                     <!-- </li> -->
                 </ul>
+                <AddTodo class='add-todo'/>
             </div>
             <div @click="flip=false" class='flip-card-back'>
                 <TodoDialog :item="{ brief, details }"/>
@@ -33,6 +34,7 @@
 <script>
 import Todo from '../components/Todo.vue';
 import TodoDialog from '../components/TodoDialog.vue';
+import AddTodo from '../components/AddTodo.vue';
 import 'vuetify/dist/vuetify.min.css'
 import { mapGetters, mapMutations, mapState } from 'vuex';                                    
 
@@ -42,6 +44,7 @@ export default {
     components: {
         Todo,
         TodoDialog,
+        AddTodo,
     },
     data() {
         return {
@@ -124,11 +127,11 @@ export default {
 
 /* Position the front and back side */
 .flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
 }
 
 .flip-card-back {

@@ -57,7 +57,6 @@ export default {
                 id: 7,
                 name: 'never gonna',
                 items: [
-                    3
                 ],
             },
         ],
