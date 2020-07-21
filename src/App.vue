@@ -109,35 +109,4 @@ html > ::-webkit-scrollbar {
   height: 0;
 }
 
-.cross {
-  width: 15px;
-  height: 15px;
-  position: relative;
-  background-size:cover ;
-  margin:auto;
-
-}
-
-.cross:before, .cross:after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  background: white;
-  transform: rotate(45deg);
-  border-radius:15px;
-}
-
-.cross:before {
-  left: 50%;
-  width: 10%;
-  margin-left: -10%;
-  height: 100%;
-}
-
-.cross:after {
-  top: 55%;
-  height: 10%;
-  margin-top: -10%;
-  width: 100%;
-}
 </style>

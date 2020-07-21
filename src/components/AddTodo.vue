@@ -1,6 +1,6 @@
 <template>
     <div id='add-todo'>
-        <div id='close-container'>
+        <div id='add-container'>
             <div id='close-1'/><div id='close-2'/>
         </div>
     </div>
@@ -30,9 +30,7 @@ export default {
     height: 4px;
     width: 12px;
     margin: auto;
-    /* background-color: #fff; */
     Z-index: 1;
-    /* border: 1px solid black; */
     transform: rotate(90deg);
     border-radius: 2px;
     background: black;
@@ -50,7 +48,7 @@ export default {
     border-radius: 4px;
 }
 
-#close-container {
+#add-container {
     height: 20px;
     width: 20px;
     opacity: 0.7;
