@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style scoped>
+
 .grid-masonry {
     display: grid;
     margin-top: 30px;

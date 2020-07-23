@@ -1,29 +1,79 @@
 <template>
-    <div id='add-todo'>
-        <div id='add-container'>
-            <div id='close-1'/><div id='close-2'/>
-        </div>
-    </div>
+	<div id='add-todo'>
+		<div @click.capture="showAddMenu" id='add-container'>
+			<div id='close-1'/><div id='close-2'/>
+		</div>
+
+		<div class='add-menu elevation-4' :class="{ 'show-add-menu': showAdd }">
+			<input v-model="brief" placeholder="brief description"/>
+			<textarea class='text-area' v-model="details" placeholder="details..."/>
+		</div>
+	</div>
 </template>
 
 <script>
 export default {
     name: 'AddTodo',
+    data() {
+        return {
+			showAdd: false,
+			brief: '',
+			details: '',
+        }
+	},
+	methods: {
+		showAddMenu() {
+			this.showAdd = true;
+			this.$emit('show-add-menu');
+		}
+	}
 }
 </script>
 
 <style scoped>
 
-#add-todo {
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+.add-menu {
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.1s ease;
+	/* display: flex; */
+	flex-flow: column nowrap;
+	margin: 5px;
+	width: 85%;
+	height: 100px;
+	background-color: white;
+	border-radius: 10px 0 10px 0;
+	overflow: hidden;
+	bottom: 10px;
 }
 
-#add-todo:hover #close-container {
-    transform: scale(0.8);
-    opacity: 1;
+input {
+	border-bottom: 1px solid rgb(121, 239, 255)
+}
+
+textarea {
+	height: 3.6em;
+	background-color: white;
+}
+
+.add-menu input, textarea{
+	outline: none;
+	margin-left: 10px;
+	resize: none;
+	background-color: white;
+}
+
+.add-menu::-webkit-scrollbar, .text-area::-webkit-scrollbar {
+	background: transparent;
+	display: none;
+	scrollbar-width: none;
+	width: 0;
+	height: 0;
+	-ms-overflow-style: none;
+}
+
+.show-add-menu {
+	opacity: 1;
 }
 
 #close-1 {
@@ -35,7 +85,7 @@ export default {
     border-radius: 2px;
     background: black;
     position: relative;
-    top: 20%
+    top: 20%;
 }   
 
 #close-2 {
@@ -43,7 +93,6 @@ export default {
     width: 12px;
     margin: auto;
     background: black;
-    /* border: 1px solid black; */
     Z-index: 2;
     border-radius: 4px;
 }
@@ -51,11 +100,18 @@ export default {
 #add-container {
     height: 20px;
     width: 20px;
+    left: 85%;
     opacity: 0.7;
-        
+    position: relative;
     /* display: flex; */
     transition: transform 0.2s ease;
     cursor: pointer;
+	z-index: 2;
+}
+
+#add-container:hover {
+	transform: scale(0.8);
+    opacity: 1;
 }
 
 </style>

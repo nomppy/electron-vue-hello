@@ -1,7 +1,7 @@
 <template>
     <div 
     @mouseleave="brief=''; details=''; flip=false"
-    class='group' :style="{ 'grid-row': 'span ' + ((4+2*group.items.length)) }">
+    class='group' :style="{ 'grid-row': 'span ' + (4+2*group.items.length+(add ? 4 : 0)) }">
         <div class='flip-card-inner elevation-3' :class="{ 'flip': flip }">
             <div class='flip-card-front'>
                 <div id='category' class='noselect'>
@@ -22,7 +22,7 @@
                         <!-- </v-row> -->
                     <!-- </li> -->
                 </ul>
-                <AddTodo class='add-todo'/>
+                <AddTodo @show-add-menu="add=true" class='add-todo'/>
             </div>
             <div @click="flip=false" class='flip-card-back'>
                 <TodoDialog :item="{ brief, details }"/>
@@ -51,6 +51,7 @@ export default {
             flip: false,
             brief: '',
             details: '',
+            add: false,
         }
     },
     computed: {
@@ -79,7 +80,6 @@ export default {
 
 <style scoped>
 
-
 .list {
     padding: 0;
     list-style: none;
@@ -104,6 +104,7 @@ export default {
     text-align: center;
     font-size: 20px;
     margin: 10px;
+    z-index: 1
 }
 
 .flip-card {
