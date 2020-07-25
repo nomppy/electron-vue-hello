@@ -27,6 +27,7 @@ export default {
     Menu,
 	},
 }
+
 </script>
 
 <style>

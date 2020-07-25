@@ -1,11 +1,11 @@
 <template>
 	<div id='add-todo'>
-		<div @click.capture="showAddMenu" id='add-container'>
+		<div @click.stop="showAddMenu" id='add-container'>
 			<div id='close-1'/><div id='close-2'/>
 		</div>
 
 		<div class='add-menu elevation-4' :class="{ 'show-add-menu': showAdd }">
-			<input v-model="brief" placeholder="brief description"/>
+			<input ref="brief" v-model="brief" placeholder="brief description"/>
 			<textarea class='text-area' v-model="details" placeholder="details..."/>
 		</div>
 	</div>
@@ -25,9 +25,15 @@ export default {
 		showAddMenu() {
 			this.showAdd = true;
 			this.$emit('show-add-menu');
+			this.$refs.brief.focus();
+		},
+		closeAddMenu() {
+			this.showAdd = false;
+			this.$emit('close-add-menu');
 		}
 	}
 }
+
 </script>
 
 <style scoped>
@@ -38,13 +44,20 @@ export default {
 	transition: opacity 0.1s ease;
 	/* display: flex; */
 	flex-flow: column nowrap;
-	margin: 5px;
+	margin-left: 10px;
+	margin-bottom: 5px;
 	width: 85%;
 	height: 100px;
 	background-color: white;
 	border-radius: 10px 0 10px 0;
 	overflow: hidden;
 	bottom: 10px;
+	z-index: -1;
+}
+
+.show-add-menu {
+	z-index: 2;
+	opacity: 1;
 }
 
 input {
@@ -70,10 +83,6 @@ textarea {
 	width: 0;
 	height: 0;
 	-ms-overflow-style: none;
-}
-
-.show-add-menu {
-	opacity: 1;
 }
 
 #close-1 {

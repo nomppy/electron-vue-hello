@@ -22,7 +22,9 @@
                         <!-- </v-row> -->
                     <!-- </li> -->
                 </ul>
-                <AddTodo @show-add-menu="add=true" class='add-todo'/>
+                <AddTodo 
+                @show-add-menu.capture="add=true"
+                class='add-todo'/>
             </div>
             <div @click="flip=false" class='flip-card-back'>
                 <TodoDialog :item="{ brief, details }"/>
