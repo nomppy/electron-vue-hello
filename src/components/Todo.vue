@@ -3,9 +3,14 @@
     <!-- @click="$emit('flip-card')" -->
     <!-- @hover="$emit('push-todo', item)" -->
     
-        <v-checkbox @click.capture.stop v-model="item.completed" class='checkbox' color='#6ec4d3'/> 
+        <v-checkbox 
+        @click.capture.stop 
+        v-model="item.completed" 
+        class='checkbox' 
+        color='#6ec4d3'
+        /> 
 
-        <GroupBrief class='brief' :item="item"/>
+        <GroupBrief class='brief' :item="item" />
 
     </div>  
 </template>
@@ -19,6 +24,7 @@ export default {
     },
     props: [
         'item',
+        'flip'
     ],
     methods: {
     }
@@ -29,6 +35,10 @@ export default {
 
 .checkbox {
     transform: scale(0.7) translateY(-2px);
+}
+
+.hidden {
+    display: none;
 }
 
 .item-container {

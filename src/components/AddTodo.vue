@@ -4,7 +4,7 @@
 			<div id='close-1'/><div id='close-2'/>
 		</div>
 
-		<div class='add-menu elevation-4' :class="{ 'show-add-menu': showAdd }">
+		<div class='add-menu elevation-4' :class="{ 'show-add-menu': showAdd && add }">
 			<input ref="brief" v-model="brief" placeholder="brief description"/>
 			<textarea class='text-area' v-model="details" placeholder="details..."/>
 		</div>
@@ -21,11 +21,18 @@ export default {
 			details: '',
         }
 	},
+	props: [
+		'add'
+	],
 	methods: {
 		showAddMenu() {
-			this.showAdd = true;
 			this.$emit('show-add-menu');
-			this.$refs.brief.focus();
+			this.showAdd = true;
+			
+			setTimeout(() => {
+				this.$refs.brief.focus();
+			}, 10)
+			
 		},
 		closeAddMenu() {
 			this.showAdd = false;
@@ -40,7 +47,7 @@ export default {
 
 .add-menu {
 	position: absolute;
-	opacity: 0;
+	display: none;
 	transition: opacity 0.1s ease;
 	/* display: flex; */
 	flex-flow: column nowrap;
@@ -52,10 +59,11 @@ export default {
 	border-radius: 10px 0 10px 0;
 	overflow: hidden;
 	bottom: 10px;
-	z-index: -1;
+	z-index: -2;
 }
 
 .show-add-menu {
+	display: block;
 	z-index: 2;
 	opacity: 1;
 }
@@ -71,7 +79,8 @@ textarea {
 
 .add-menu input, textarea{
 	outline: none;
-	margin-left: 10px;
+	margin-left: 20px;
+	width: 80%;
 	resize: none;
 	background-color: white;
 }

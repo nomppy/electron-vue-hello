@@ -1,28 +1,24 @@
 <template>
     <div 
     @mouseleave="brief=''; details=''; flip=false"
+    @click="add=false"
     class='group' :style="{ 'grid-row': 'span ' + (4+2*group.items.length+(add ? 4 : 0)) }">
         <div class='flip-card-inner elevation-3' :class="{ 'flip': flip }">
             <div class='flip-card-front'>
                 <div id='category' class='noselect'>
-                    <h3> {{ group.name }} - {{ group.items.length }} </h3>
+                    <h3> {{ group.name }} </h3>
                 </div>
                 <ul class='list'>
-                    <Todo class='todo'
+                    <Todo 
+                    class='todo'
                     @click.native="flip = true"
                     @mouseenter.native="updateTodo(item)"
+                    :flip="flip"
                     v-for="item in getTodosInGroup(group.id)" :key="item.id" :item="item"/>
-
-                    <!-- <li class='list-item' v-for="item in getTodosInGroup(group.id)" :key="item.id"> -->
-                        <!-- <v-row align='center'> -->
-                            <!-- not sure why this works, thought the only way to change data was through mutations -->
-                        <!-- <Todo :item='item'/> -->
-
-                        <!-- <TodoDialog :item='item' class='dialog' :class="{ 'wrap-left': mouseOnRight }"/> -->
-                        <!-- </v-row> -->
-                    <!-- </li> -->
                 </ul>
                 <AddTodo 
+                :add="add"
+                @click.native.stop
                 @show-add-menu.capture="add=true"
                 class='add-todo'/>
             </div>
@@ -73,8 +69,10 @@ export default {
             'todo/toggleComplete'
         ]),
         updateTodo(item){
-            this.brief = item.brief;
-            this.details = item.details;
+            if (!this.flip) {
+                this.brief = item.brief;
+                this.details = item.details;
+            }
         }
     }
 }
@@ -138,8 +136,14 @@ export default {
 }
 
 .flip-card-back {
+    cursor: default;
     transform: rotateY(180deg);
     background-color: rgb(73, 73, 73);
+}
+
+.flip-card-back.flip {
+    opacity: 0.5;
+    z-index: 3;
 }
 
 .flip {
