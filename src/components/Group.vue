@@ -20,6 +20,7 @@
                 :add="add"
                 @click.native.stop
                 @show-add-menu.capture="add=true"
+                @close-add-menu.capture="add=false"
                 class='add-todo'/>
             </div>
             <div @click="flip=false" class='flip-card-back'>

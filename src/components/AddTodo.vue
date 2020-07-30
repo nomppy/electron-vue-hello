@@ -5,8 +5,14 @@
 		</div>
 
 		<div class='add-menu elevation-4' :class="{ 'show-add-menu': showAdd && add }">
-			<input ref="brief" v-model="brief" placeholder="brief description"/>
-			<textarea class='text-area' v-model="details" placeholder="details..."/>
+			<form @submit.prevent="handleSubmit">
+				<input 
+				ref="brief" 
+				v-model="brief" placeholder="brief description"
+				:style="{ 'border-bottom': '1px solid ' + (validSubmit ? '#2ae6f7' : '#ea1919')}"/> 
+				<!-- changes color of underline if there is text -->
+				<textarea class='text-area' v-model="details" placeholder="details... (optional)"/>
+			</form>
 		</div>
 	</div>
 </template>
@@ -24,6 +30,11 @@ export default {
 	props: [
 		'add'
 	],
+	computed: {
+		validSubmit() {
+			return (this.brief.length > 0);
+		}
+	},
 	methods: {
 		showAddMenu() {
 			this.$emit('show-add-menu');
@@ -32,11 +43,28 @@ export default {
 			setTimeout(() => {
 				this.$refs.brief.focus();
 			}, 10)
-			
 		},
 		closeAddMenu() {
 			this.showAdd = false;
 			this.$emit('close-add-menu');
+		},
+		handleSubmit() {
+
+			if (!this.validSubmit) {
+				this.$refs.brief.classList.add('shake');
+				setTimeout(() => {
+					this.$refs.brief.classList.remove('shake');
+				}, 500);
+				
+
+				// this.$refs.brief.removeClass('shake').addClass('shake');
+				return;
+			}
+
+			this.closeAddMenu();
+
+			this.brief='';
+			this.details='';
 		}
 	}
 }
@@ -70,6 +98,10 @@ export default {
 
 input {
 	border-bottom: 1px solid rgb(121, 239, 255)
+}
+
+.shake {
+	animation: shakeX 0.5s;
 }
 
 textarea {
@@ -130,6 +162,28 @@ textarea {
 #add-container:hover {
 	transform: scale(0.8);
     opacity: 1;
+}
+
+@keyframes shakeX {
+  from,
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(1px, 0, 0);
+  }
 }
 
 </style>
