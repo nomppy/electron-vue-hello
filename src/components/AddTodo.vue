@@ -18,6 +18,9 @@
 </template>
 
 <script>
+// import sqlite from "../utils/sqlite.js";
+const sqlite = require("../utils/sqlite.js");
+
 export default {
     name: 'AddTodo',
     data() {
@@ -55,11 +58,10 @@ export default {
 				setTimeout(() => {
 					this.$refs.brief.classList.remove('shake');
 				}, 500);
-				
-
-				// this.$refs.brief.removeClass('shake').addClass('shake');
 				return;
 			}
+
+			sqlite.addTodo(this.brief, this.details);
 
 			this.closeAddMenu();
 
