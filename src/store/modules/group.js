@@ -65,5 +65,10 @@ export default {
 		getById: (state) => (id) => {
 			return state.groups[id];
 		},
-	},
+    },
+    mutations: {
+        push (state, data) {
+            state.groups = data;
+        }
+    }
 }

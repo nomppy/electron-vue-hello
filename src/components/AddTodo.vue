@@ -18,8 +18,6 @@
 </template>
 
 <script>
-// import sqlite from "../utils/sqlite.js";
-const sqlite = require("../utils/sqlite.js");
 
 export default {
     name: 'AddTodo',
@@ -60,8 +58,6 @@ export default {
 				}, 500);
 				return;
 			}
-
-			sqlite.addTodo(this.brief, this.details);
 
 			this.closeAddMenu();
 

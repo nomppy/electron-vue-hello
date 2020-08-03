@@ -35,7 +35,7 @@ import Todo from '../components/Todo.vue';
 import TodoDialog from '../components/TodoDialog.vue';
 import AddTodo from '../components/AddTodo.vue';
 import 'vuetify/dist/vuetify.min.css'
-import { mapGetters, mapMutations, mapState } from 'vuex';                                    
+import { mapGetters, mapState } from 'vuex';                                    
 
 
 export default {
@@ -66,9 +66,6 @@ export default {
         'group',
     ],
     methods: {
-        ...mapMutations([
-            'todo/toggleComplete'
-        ]),
         updateTodo(item){
             if (!this.flip) {
                 this.brief = item.brief;
