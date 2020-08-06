@@ -1,42 +1,28 @@
+const Store = require('electron-store');
+const store = new Store();
 
 export default {
     namespaced: true,
 
     state: {
-        items: {
-			0: {
-				id: 0,
-				brief: 'brief description',
-				details: 'details',
-				completed: false,
-			},
-			1: {
-				id: 1,
-				brief: 'dafda',
-				details: 'dfadfa',
-				completed: true,
-			},
-			2: {
-				id: 2,
-				brief: 'die',
-				details: 'never say goodbye',
-				completed: true,
-			},
-			3: {
-				id: 3,
-				brief: 'give you up let you down run around and dsert you',
-				details: 'never gonna',
-				completed: false,
-			}
-		},
-    },
+        items: {}
+	},
     mutations: {
         toggleComplete(state, todoId) {
 			state.items[todoId].completed = !state.items[todoId].completed;
+			store.set(`items.${todoId}.completed`, !store.get(`items.${todoId}.completed`));
 		},
-    },
-    actions: {
-
+		init(state) {
+			state.items = store.get('items');
+		},
+		addTodo(state, todo) {
+			state.items[todo.id] = todo;
+			store.set(`items.${todo.id}`, todo);
+		},
+		removeTodo(state, id) {
+			delete state.items[id];
+			store.delete(`items.${id}`);
+		}
     },
     getters: {
         getById: (state) => (id) => {

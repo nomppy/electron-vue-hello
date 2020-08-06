@@ -4,7 +4,7 @@
     <!-- @hover="$emit('push-todo', item)" -->
     
         <v-checkbox 
-        @click.capture.stop 
+        @click.stop="store.commit('todo/toggleComplete', item.id)"
         v-model="item.completed" 
         class='checkbox' 
         color='#6ec4d3'
@@ -17,6 +17,8 @@
 
 <script>
 import GroupBrief from '../components/GroupBrief.vue';
+import { mapMutations } from 'vuex';
+
 export default {
     name: 'Todo',
     components: {
@@ -27,6 +29,9 @@ export default {
         'flip'
     ],
     methods: {
+        ...mapMutations([
+            'todo/toggleComplete'
+        ])
     }
 }
 </script>

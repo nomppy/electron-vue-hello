@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import todo from './modules/todo'
 import group from './modules/group'
-import todoModal from './modules/todoModal'
 
 Vue.use(Vuex)
 
@@ -23,6 +22,5 @@ export default new Vuex.Store({
 	modules: {
 		todo,
 		group,
-		todoModal,
 	}
 })

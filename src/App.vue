@@ -19,7 +19,6 @@
 <script>
 import Menu from './components/Menu.vue';
 import TitleBar from './components/TitleBar.vue';
-import local from './utils/store.js';
 import { mapMutations } from 'vuex';
 
 export default {
@@ -30,21 +29,13 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'group/push'
+      'todo/init',
+      'group/init'
     ])
   },
   mounted() {
-    local.push();
-    local.fetch(local => {
-      console.log(local);
-      this.$store.commit('group/push',{
-                id: 0,
-                name: 'template',
-                items: [
-                    0, 1
-                ]
-            });
-    })
+    this.store.commit('todo/init');
+    this.store.commit('group/init');
   }
 }
 

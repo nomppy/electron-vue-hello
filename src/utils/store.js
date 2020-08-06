@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fs = require('fs');
 
 async function fetchLocal(callback) {
 	var local = {
@@ -47,22 +47,24 @@ async function fetchLocal(callback) {
 }
 
 async function pushLocal(local, callback) {
-	console.log("pushing to local...");
 	local.groups.forEach(group => {
-		fs.writeFile("./db/group/" + String(group.id) + ".json", JSON.stringify(group), (err) => {
-			console.error(err);
+		fs.outputJSON("./db/group/" + String(group.id) + ".json", group, (err) => {
+			if (err)
+				console.error(err);
+			else
+				console.log(group.id);
 		});
+		console.log(group);
 	});
+
 	local.todos.forEach(todo => {
 		Object.entries(todo).forEach((key, value) => {
-			fs.writeFile(`./db/group/${key}.json`, JSON.stringify(value), (err) => {
+			fs.outputJSON(`./db/group/${key}.json`, value, (err) => {
 				console.error(err);
 			});
 		});
 	});
-	fs.writeFile("./db/group/test.json", "{dafdafd: fdafd}", (err) => {
-		console.error(err);
-	});
+
 	callback();
 }
 

@@ -1,3 +1,5 @@
+const Store = require('electron-store');
+const store = new Store();
 
 export default {
     namespaced: true,
@@ -5,61 +7,13 @@ export default {
     state: {
         groups: [
             {
-                id: 0,
-                name: 'template',
-                items: [
-                    0, 1
-                ]
-            },
-            {
                 id: 1,
-                name: 'hi',
+                name: 'ooga booga',
                 items: [
-                    2
+                    1
                 ]
-            },
-            {
-                id: 2,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
-                id: 3,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
-                id: 4,
-                name: 'hi',
-                items: [
-                    2
-                ]
-            },
-            {
-                id: 5,
-                name: 'never gonna',
-                items: [
-                    3
-                ],
-            },
-            {
-                id: 6,
-                name: 'template',
-                items: [
-                    0, 1
-                ]
-            },
-            {
-                id: 7,
-                name: 'never gonna',
-                items: [
-                ],
-            },
-        ],
+            }
+        ]
     },
     getters: {
 		getById: (state) => (id) => {
@@ -67,8 +21,16 @@ export default {
 		},
     },
     mutations: {
-        push (state, data) {
-            state.groups = data;
+        init (state) {
+            state.groups = store.get('groups');
+        },
+        addGroup (state, group) {
+            state.groups.push(group);
+            store.set(`groups`, state.groups);
+        },
+        removeGroup (state, id) {
+            state.groups = state.groups.filter((group) => group.id !== id);
+            store.set(`groups`, state.groups);
         }
     }
 }
