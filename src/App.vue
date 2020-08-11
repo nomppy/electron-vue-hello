@@ -29,13 +29,11 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'todo/init',
-      'group/init'
+      'init'
     ])
   },
   mounted() {
-    this.store.commit('todo/init');
-    this.store.commit('group/init');
+    this.$store.commit('init');
   }
 }
 

@@ -1,6 +1,6 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 
-async function fetchLocal(callback) {
+function fetchLocal(callback) {
 	var local = {
 		groups: [],
 		todos: {}
@@ -11,16 +11,17 @@ async function fetchLocal(callback) {
 			console.error(err);
 		}
 		else {
-			files.forEach(file => {
-				fs.readFile(file, (err, data) => {
+			for (var i = 0; i < files.length; i++) {
+				fs.readFile(`./db/group/${i}.json`, (err, data) => {
 					if (err) {
 						console.error(err);
 					}
 					else {
 						local.groups.push(JSON.parse(data));
 					}
-				})
-			})
+				});
+			}
+		
 		}
 	});
 
@@ -29,8 +30,8 @@ async function fetchLocal(callback) {
 			console.error(err);
 		}
 		else {
-			files.forEach(file => {
-				fs.readFile(file, (err, data) => {
+			for (var i = 0; i < files.length; i++) {
+				fs.readFile(`./db/group/${i}.json`, (err, data) => {
 					if (err) {
 						console.error(err);
 					}
@@ -38,24 +39,29 @@ async function fetchLocal(callback) {
 						let tmp = JSON.parse(data);
 						local.todos[tmp.id] = tmp;
 					}
-				})
-			})
+				});
+			}
 		}
 	});
 
 	callback(local);
 }
 
-async function pushLocal(local, callback) {
-	local.groups.forEach(group => {
+async function pushLocal(local) {
+	if (!local.groups) {
+		local.groups = [];
+	}
+
+	local.groups.forEach((group) => {
 		fs.outputJSON("./db/group/" + String(group.id) + ".json", group, (err) => {
 			if (err)
 				console.error(err);
-			else
-				console.log(group.id);
 		});
-		console.log(group);
 	});
+
+	if (!local.todos) {
+		local.todos = {};
+	}
 
 	local.todos.forEach(todo => {
 		Object.entries(todo).forEach((key, value) => {
@@ -64,11 +70,63 @@ async function pushLocal(local, callback) {
 			});
 		});
 	});
+}
 
-	callback();
+function addGroup(group) {
+	_getNextGroupId((id) => {
+		fs.outputJSON("./db/group/" + id + ".json", {id, ...group}, (err) => {
+			if (err) {
+				console.log(err);
+			}
+		});
+	})
+
+}
+
+async function removeGroup(groupId) {
+	fs.unlink(`./db/group/${groupId}.json`, (err) => {
+		if (err) {
+			console.error(err);
+		}
+	})
+}
+
+function addTodo(todo) {
+	_getNextTodoId((id) => {
+		fs.outputJSON("./db/group/" + id + ".json", todo, (err) => {
+			if (err) {
+				console.log(err);
+			}
+		});
+	})
+}
+
+async function _getNextGroupId(cb) {
+	fs.readdir("./db/group", (err, files) => {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			cb(files.length);
+		}
+	})
+}
+
+async function _getNextTodoId(cb) {
+	fs.readdir("./db/todo", (err, files) => {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			cb(files.length);
+		}
+	})
 }
 
 export default {
 	fetch: fetchLocal,
 	push: pushLocal,
+	addTodo,
+	addGroup,
+	removeGroup,
 }

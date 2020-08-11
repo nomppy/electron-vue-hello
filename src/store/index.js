@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 import todo from './modules/todo'
 import group from './modules/group'
 
+import local from '../utils/store.js';
+
 Vue.use(Vuex)
 
 
@@ -16,6 +18,12 @@ export default new Vuex.Store({
 		}
 	},
 	mutations: {
+		init (state) {
+			local.fetch((data) => {
+				state.group.groups = data.groups;
+				state.todo.items = data.todos;
+			})
+		}
 	},
 	actions: {
 	},

@@ -2,22 +2,25 @@
     <div id='main' class='grid-masonry'>
 
         <Group class='grid-item' v-for="group in groups" :key="group.id" :group="group"/>
+        <AddGroup class='grid-item'/>
         
     </div>
 </template>
 
 <script>
 import Group from '../components/Group.vue';
+import AddGroup from '../components/AddGroup.vue';
 import { mapState } from 'vuex'
 
 export default {
     name: 'Main',
     components: {
         Group,
+        AddGroup
     },
     computed: mapState('group', {
         groups: 'groups'
-    }),
+    })
 }
 </script>
 

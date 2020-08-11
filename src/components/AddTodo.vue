@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import local from '../utils/store.js';
 
 export default {
     name: 'AddTodo',
@@ -58,7 +59,7 @@ export default {
 				}, 500);
 				return;
 			}
-
+			local.addTodo({brief: this.brief, details: this.details});
 			this.closeAddMenu();
 
 			this.brief='';
