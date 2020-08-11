@@ -23,9 +23,25 @@ export default new Vuex.Store({
 				state.group.groups = data.groups;
 				state.todo.items = data.todos;
 			})
+		},
+		addTodo (state, {todo, group} ) {
+			local.addTodo(todo, (id) => {
+				state.todo.items[id] = todo;
+				
+				state.group.groups[group].items.push(id);
+				local.addTodoToGroup(id, group);
+			})
 		}
 	},
 	actions: {
+		addTodo (state, {todo, group} ) {
+			local.addTodo(todo, (id) => {
+				state.todo.items[id] = todo;
+				
+				state.group.groups[group].items.push(id);
+				local.addTodoToGroup(id, group);
+			})
+		}
 	},
 	modules: {
 		todo,

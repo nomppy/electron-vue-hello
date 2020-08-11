@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import local from '../utils/store.js';
+
+import { mapMutations } from 'vuex';
 
 export default {
     name: 'AddTodo',
@@ -30,6 +31,7 @@ export default {
         }
 	},
 	props: [
+		'groupId',
 		'add'
 	],
 	computed: {
@@ -38,6 +40,9 @@ export default {
 		}
 	},
 	methods: {
+		...mapMutations([
+			'addTodo',
+		]),
 		showAddMenu() {
 			this.$emit('show-add-menu');
 			this.showAdd = true;
@@ -59,7 +64,7 @@ export default {
 				}, 500);
 				return;
 			}
-			local.addTodo({brief: this.brief, details: this.details});
+			this.$store.commit('addTodo', {todo: {brief: this.brief, details: this.details}, group: this.groupId});
 			this.closeAddMenu();
 
 			this.brief='';

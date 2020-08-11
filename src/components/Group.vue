@@ -17,6 +17,7 @@
                     v-for="item in getTodosInGroup(group.id)" :key="item.id" :item="item"/>
                 </ul>
                 <AddTodo 
+                :groupId="group.id"
                 :add="add"
                 @click.native.stop
                 @show-add-menu.capture="add=true"

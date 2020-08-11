@@ -91,13 +91,30 @@ async function removeGroup(groupId) {
 	})
 }
 
-function addTodo(todo) {
+function addTodo(todo, cb) {
 	_getNextTodoId((id) => {
-		fs.outputJSON("./db/group/" + id + ".json", todo, (err) => {
+		fs.outputJSON("./db/todo/" + id + ".json", todo, (err) => {
 			if (err) {
 				console.log(err);
 			}
 		});
+		cb(id);
+	})
+}
+
+function addTodoToGroup(todoId, groupId) {
+	fs.readFile(`./db/group/${groupId}.json`, (err, data) => {
+		if (err) {
+			console.error(err);
+		}
+		else {
+			let tmp = JSON.parse(data).items.push(todoId);
+			fs.writeJSON(`./db/group/${groupId}.json`, tmp, (err) => {
+				if(err) {
+					console.error(err);
+				}
+			})
+		}
 	})
 }
 
@@ -129,4 +146,5 @@ export default {
 	addTodo,
 	addGroup,
 	removeGroup,
+	addTodoToGroup
 }
