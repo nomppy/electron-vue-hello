@@ -28,8 +28,7 @@ function fetchLocal(callback) {
 			console.error(err);
 		}
 		else {
-			let tmp = JSON.parse(data);
-			local.todos[tmp.id] = tmp;
+			local.todos = JSON.parse(data);
 		}
 	});
 	callback(local);

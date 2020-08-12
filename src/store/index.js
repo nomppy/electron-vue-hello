@@ -20,6 +20,9 @@ export default new Vuex.Store({
 	mutations: {
 		init (state) {
 			local.fetch((data) => {
+				console.log(data);
+				console.log(data.groups);
+				console.log(data.todos);
 				state.group.groups = data.groups;
 				state.todo.items = data.todos;
 			})
