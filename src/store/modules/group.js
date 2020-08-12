@@ -18,7 +18,7 @@ export default {
         },
         removeGroup (state, id) {
             state.groups = state.groups.filter((group) => group.id !== id);
-            local.push(state);
+            local.removeGroup(state);
         }
     }
 }

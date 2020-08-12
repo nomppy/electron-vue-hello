@@ -1,4 +1,3 @@
-import local from '../../utils/store.js';
 
 export default {
     namespaced: true,

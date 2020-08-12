@@ -6,44 +6,32 @@ function fetchLocal(callback) {
 		todos: {}
 	};
 
-	fs.readdir("./db/group/", (err, files) => {
+	fs.readFile(`./db/groups.json`, (err, data) => {
 		if (err) {
+			if (err.code === "ENOENT") {
+				_writeGroup([]);
+				return;
+			}
 			console.error(err);
 		}
 		else {
-			for (var i = 0; i < files.length; i++) {
-				fs.readFile(`./db/group/${i}.json`, (err, data) => {
-					if (err) {
-						console.error(err);
-					}
-					else {
-						local.groups.push(JSON.parse(data));
-					}
-				});
-			}
-		
+			local.groups = JSON.parse(data);
 		}
 	});
 
-	fs.readdir("./db/todo/", (err, files) => {
+	fs.readFile(`./db/todos.json`, (err, data) => {
 		if (err) {
+			if (err.code === "ENOENT") {
+				_writeTodo({});
+				return;
+			}
 			console.error(err);
 		}
 		else {
-			for (var i = 0; i < files.length; i++) {
-				fs.readFile(`./db/todo/${i}.json`, (err, data) => {
-					if (err) {
-						console.error(err);
-					}
-					else {
-						let tmp = JSON.parse(data);
-						local.todos[tmp.id] = tmp;
-					}
-				});
-			}
+			let tmp = JSON.parse(data);
+			local.todos[tmp.id] = tmp;
 		}
 	});
-
 	callback(local);
 }
 
@@ -52,91 +40,111 @@ async function pushLocal(local) {
 		local.groups = [];
 	}
 
-	local.groups.forEach((group) => {
-		fs.outputJSON("./db/group/" + String(group.id) + ".json", group, (err) => {
-			if (err)
-				console.error(err);
-		});
-	});
+	_writeGroup(local.groups);
 
 	if (!local.todos) {
 		local.todos = {};
 	}
 
-	local.todos.forEach(todo => {
-		Object.entries(todo).forEach((key, value) => {
-			fs.outputJSON(`./db/group/${key}.json`, value, (err) => {
-				console.error(err);
-			});
-		});
-	});
+	_writeTodo(local.todos);
 }
 
 function addGroup(group) {
 	_getNextGroupId((id) => {
-		fs.outputJSON("./db/group/" + id + ".json", {id, ...group}, (err) => {
+		fs.readFile('./db/groups.json', (err, data) => {
 			if (err) {
-				console.log(err);
+				console.error(err);
+			}
+			else {
+				data = JSON.parse(data);
+				data.push({ id, ...group });
+				_writeGroup(data);
 			}
 		});
-	})
-
+	});
 }
 
 async function removeGroup(groupId) {
-	fs.unlink(`./db/group/${groupId}.json`, (err) => {
+	fs.readFile("./db/groups.json", (err, data) => {
 		if (err) {
 			console.error(err);
+		}
+		else {
+			data = data.filter(group => group.id !== groupId);
+			_writeGroup(data);
 		}
 	})
 }
 
 function addTodo(todo, cb) {
 	_getNextTodoId((id) => {
-		fs.outputJSON("./db/todo/" + id + ".json", { id, ...todo }, (err) => {
+		fs.readFile('./db/todos.json', (err, data) => {
 			if (err) {
-				console.log(err);
+				console.error(err);
 			}
-		});
+			else {
+				data = JSON.parse(data);
+				data[id] = { id, ...todo};
+
+				_writeTodo(data);
+			}
+		})
 		cb(id);
 	})
 }
 
 function addTodoToGroup(todoId, groupId) {
-	fs.readFile(`./db/group/${groupId}.json`, (err, data) => {
+	fs.readFile(`./db/groups.json`, (err, data) => {
 		if (err) {
 			console.error(err);
 		}
 		else {
-			let tmp = JSON.parse(data);
-			tmp.items.push(todoId);
-			fs.writeJSON(`./db/group/${groupId}.json`, tmp, (err) => {
-				if(err) {
-					console.error(err);
+			data = JSON.parse(data);
+			data.forEach(group => {
+				if (group.id === groupId) {
+					group.items.push(todoId);
 				}
-			})
+			});
+			_writeGroup(data);
 		}
 	})
 }
 
 async function _getNextGroupId(cb) {
-	fs.readdir("./db/group", (err, files) => {
+	fs.readFile('./db/groups.json', (err, data) => {
 		if (err) {
 			console.log(err);
 		}
 		else {
-			cb(files.length);
+			cb(JSON.parse(data).length);
 		}
 	})
 }
 
 async function _getNextTodoId(cb) {
-	fs.readdir("./db/todo", (err, files) => {
+	fs.readFile('./db/todos.json', (err, data) => {
 		if (err) {
-			console.log(err);
+			console.error(err);
 		}
 		else {
-			cb(files.length);
+			data = JSON.parse(data);
+			cb(Object.keys(data).length);
+		}
+	})
+}
+
+function _writeGroup(group) {
+	fs.writeJSON('./db/groups.json', group, (err) => {
+		if (err) {
+			console.error(err);
+		}
+	});
+}
+
+function _writeTodo(todo) {
+	fs.writeJSON('./db/todos.json', todo, (err) => {
+		if (err) {
+			console.error(err);
 		}
 	})
 }
