@@ -31,7 +31,7 @@ function fetchLocal(callback) {
 		}
 		else {
 			for (var i = 0; i < files.length; i++) {
-				fs.readFile(`./db/group/${i}.json`, (err, data) => {
+				fs.readFile(`./db/todo/${i}.json`, (err, data) => {
 					if (err) {
 						console.error(err);
 					}
@@ -93,7 +93,7 @@ async function removeGroup(groupId) {
 
 function addTodo(todo, cb) {
 	_getNextTodoId((id) => {
-		fs.outputJSON("./db/todo/" + id + ".json", todo, (err) => {
+		fs.outputJSON("./db/todo/" + id + ".json", { id, ...todo }, (err) => {
 			if (err) {
 				console.log(err);
 			}
@@ -108,7 +108,8 @@ function addTodoToGroup(todoId, groupId) {
 			console.error(err);
 		}
 		else {
-			let tmp = JSON.parse(data).items.push(todoId);
+			let tmp = JSON.parse(data);
+			tmp.items.push(todoId);
 			fs.writeJSON(`./db/group/${groupId}.json`, tmp, (err) => {
 				if(err) {
 					console.error(err);
