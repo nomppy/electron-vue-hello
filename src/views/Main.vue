@@ -1,6 +1,6 @@
 <template>
     <div id='main' class='grid-masonry'>
-        {{ groups }}
+
         <Group class='grid-item' v-for="group in groups" :key="group.id" :group="group"/>
         <AddGroup class='grid-item'/>
         

@@ -4,7 +4,7 @@
     <!-- @hover="$emit('push-todo', item)" -->
     
         <v-checkbox 
-        @click.stop="store.commit('todo/toggleComplete', item.id)"
+        @click.stop="$store.commit('todo/toggleComplete', item.id)"
         v-model="item.completed" 
         class='checkbox' 
         color='#6ec4d3'

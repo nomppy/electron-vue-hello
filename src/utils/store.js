@@ -1,37 +1,35 @@
 const fs = require('fs-extra');
 
-function fetchLocal(callback) {
-	var local = {
+async function fetchLocal() {
+
+	let local = {
 		groups: [],
 		todos: {}
 	};
 
-	fs.readFile(`./db/groups.json`, (err, data) => {
-		if (err) {
-			if (err.code === "ENOENT") {
-				_writeGroup([]);
-				return;
-			}
-			console.error(err);
+	try {
+		local.groups = JSON.parse(await fs.readFile(`./db/groups.json`));
+	} catch (err) {
+		if (err.code === 'ENOENT') {
+			_writeGroup([]);
+			return;
 		}
-		else {
-			local.groups = JSON.parse(data);
-		}
-	});
+		console.error(err);
+	}
 
-	fs.readFile(`./db/todos.json`, (err, data) => {
-		if (err) {
-			if (err.code === "ENOENT") {
-				_writeTodo({});
-				return;
-			}
-			console.error(err);
+	try {
+
+		local.todos = JSON.parse(await fs.readFile(`./db/todos.json`));
+	} catch (err) {
+		if (err.code === 'ENOENT') {
+			_writeTodo({});
+			return;
 		}
-		else {
-			local.todos = JSON.parse(data);
-		}
-	});
-	callback(local);
+		console.error(err);
+	}
+
+	return local;
+	
 }
 
 async function pushLocal(local) {
@@ -149,8 +147,9 @@ function _writeTodo(todo) {
 }
 
 export default {
-	fetch: fetchLocal,
-	push: pushLocal,
+	
+	fetchLocal,
+	pushLocal,
 	addTodo,
 	addGroup,
 	removeGroup,

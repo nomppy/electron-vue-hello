@@ -19,7 +19,7 @@
 <script>
 import Menu from './components/Menu.vue';
 import TitleBar from './components/TitleBar.vue';
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
 	name: 'App',
@@ -28,12 +28,13 @@ export default {
     Menu,
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'init'
     ])
   },
   mounted() {
-    this.$store.commit('init');
+    this.$store.dispatch('init');
+    // this.$store.commit('init');
   }
 }
 
