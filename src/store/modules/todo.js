@@ -13,6 +13,11 @@ export default {
     getters: {
         getById: (state) => (id) => {
 			return state.items[id];
-		},
+        },
+        getItems: (state) => (idArr) => {
+            return state.items.filter((item, index) => {
+                return idArr.contains(index);
+            });
+        }
     }
 };

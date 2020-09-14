@@ -23,8 +23,9 @@ export default new Vuex.Store({
 			state.todo.items = data.todos;
 		},
 		addTodo (state, {todo, group} ) {
+			todo = { ...todo, completed: false };
 			local.addTodo(todo, (id) => {
-				state.todo.items[id] = todo;
+				state.todo.items[id] = { id, ...todo };
 				
 				state.group.groups[group].items.push(id);
 				local.addTodoToGroup(id, group);
@@ -35,14 +36,6 @@ export default new Vuex.Store({
 		async init (context) {
 			let data = await local.fetchLocal();
 			context.commit('init', data);
-		},
-		addTodo (state, {todo, group} ) {
-			local.addTodo(todo, (id) => {
-				state.todo.items[id] = todo;
-				
-				state.group.groups[group].items.push(id);
-				local.addTodoToGroup(id, group);
-			})
 		}
 	},
 	modules: {

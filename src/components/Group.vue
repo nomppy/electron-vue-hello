@@ -14,7 +14,7 @@
                     @click.native="flip = true"
                     @mouseenter.native="updateTodo(item)"
                     :flip="flip"
-                    v-for="item in getTodosInGroup(group.id)" :key="item.id" :item="item"/>
+                    v-for="item in groupItems" :key="item.id" :item="item"/>
                 </ul>
                 <AddTodo 
                 :groupId="group.id"
@@ -36,8 +36,6 @@ import Todo from '../components/Todo.vue';
 import TodoDialog from '../components/TodoDialog.vue';
 import AddTodo from '../components/AddTodo.vue';
 import 'vuetify/dist/vuetify.min.css'
-import { mapGetters, mapState } from 'vuex';                                    
-
 
 export default {
     name: "Group",
@@ -55,13 +53,14 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
-        'getTodosInGroup',
-        'todo/getById'
-        ]),
-        ...mapState('todo', [
-            'items',
-        ]),
+        items() {
+            return this.$store.state.todo.items;
+        },
+        groupItems() {
+            return Object.values(this.items).filter(item => {
+                return this.group.items.includes(item.id);
+            });
+        }
     },
     props: [
         'group',
