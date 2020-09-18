@@ -2,7 +2,7 @@
     <div 
     @mouseleave="brief=''; details=''; flip=false"
     @click="add=false"
-    class='group' :style="{ 'grid-row': 'span ' + (4+2*group.items.length+(add ? 4 : 0)) }">
+    class='group' :style="{ 'grid-row': 'span ' + (4+Math.floor(2.4*group.items.length)+(add ? 4 : 0)) }">
         <div class='flip-card-inner elevation-3' :class="{ 'flip': flip }">
             <div class='flip-card-front'>
                 <div id='category' class='noselect'>
